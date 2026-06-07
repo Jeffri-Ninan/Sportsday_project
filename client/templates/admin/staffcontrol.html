@@ -1,0 +1,338 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Admin Dashboard</title>
+
+    <link rel="stylesheet" href="staffstyle.css">
+
+</head>
+<body>
+
+  <div class="container">
+   <!-- ----------------------Sidebar---------------------------- --> 
+    <div class="sidebar">
+     
+      <aside>
+        <ul class="menu">
+          <h2>Sports Day'26</h2>
+          <h4>Managing Athletics'26</h4>
+          <li><a href="dashboard.html" >Dashboard</a></li>
+          <li><a href="deptcenter.html">Department Center</a></li>
+          <li><a href="staffcontrol.html" class="active">Staff Control</a></li>
+          <li><a href="event-control.html">Event Control</a></li>
+          <li><a href="eventlogs.html">Event Logs</a></li>
+        </ul>
+
+        <div class="bottom-menu">
+          <ul>
+            <li><a href="#">Help Center</a></li>
+            <li><a href="#">Logout</a></li>
+          </ul>
+        </div>
+
+      </aside>
+
+    </div>
+
+    <!-- -----------------------Main Content---------------------------- -->
+    <div class="main-content">
+      
+      <div class="top-bar">
+        <div class="title-group">
+          <h2>Staff Control</h2>
+          <p>Here you can manage all the staff details includes adding, removing staff.</p>
+        </div>
+        
+      </div>
+
+      <!-- ------------------cards----------------- -->
+      <div class="cards">
+        <div class="card">
+          <h3>23</h3>
+          <p>Total Manager</p>
+        </div>
+
+        <div class="card">
+          <h3>25</h3>
+          <p>Total Events</p>
+        </div>
+
+        <div class="card">
+          <h3>450</h3>
+          <p>Total Students</p>
+        </div>
+
+        <div class="card">
+          <h3>10</h3>
+          <p>Completed Events</p>
+        </div>
+      </div>
+
+      <!-- ---------------------------Staff Reg-------------------------- -->
+      <div class="staff-box">
+
+        <div class="new-staff">
+            <h3>Event Manager Registration</h3>
+            <form id="addStaffForm">
+                <div class="staff-reg">
+                    
+                    <div class="form-grp">
+                        <label for="deptInput">Department</label>
+                        <input type="text" id="deptInput" placeholder="Enter your Department" required>
+                    </div>
+                    
+                    <div class="form-grp">
+                        <label for="nameInput">Full Name</label>
+                        <input type="text" id="nameInput" placeholder="Enter your Name" required>
+                    </div>
+                    
+                    <div class="form-grp">
+                        <label for="staffIdInput">Staff ID</label>
+                        <input type="text" id="staffIdInput" placeholder="Enter your ID" required>
+                    </div>
+                    
+                    <div class="form-grp">
+                        <label for="contactInput">Contact</label>
+                        <input type="tel" id="contactInput" placeholder="Enter your Contact" required>
+                    </div>
+                    
+                    <div class="form-grp">
+                        <label for="shiftSelect">Shift</label>
+                        <select id="shiftSelect" required>
+                            <option value="">Select Shift</option>
+                            <option>Shift-I</option>
+                            <option>Shift-II</option>
+                        </select>
+                    </div>
+                    
+                    <div class="form-grp">
+                        <label for="inChargeSelect">In-Charge</label>
+                        <select id="inChargeSelect" required>
+                            <option value="">Select Event</option>
+                            <option>Football</option>
+                            <option>Volleyball</option>
+                            <option>Basketball</option>
+                            <option>100m Sprint</option>
+                        </select>
+                    </div>
+
+                      <button type="reset" class="reset-btn">Reset</button>
+                      <button type="submit" class="submit-btn">Add Staff</button>
+
+                </div>
+            </form>
+
+        </div>
+
+        <div class="staff-details">
+          <h3>New Eventmanager Details</h3>
+
+          <div class="pre-box" id="previewContainer" style="display: none;">
+
+            <div class="circle-logo" id="preCircleLogo">ED</div>
+
+            <div class="staff-name">
+
+              <h2 id="preHeader">New Event Manager</h2>
+
+            </div>
+            <div class="preview-details">
+
+              <div class="detail-card">
+
+                <p><strong>Staff Name :</strong><span id="preStaffName">Dr. Johnson</span></p>
+
+              </div>
+              <div class="detail-card">
+
+                <p><strong>Contact :</strong><span id="preContact">95432 45687</span></p>
+
+              </div>
+              <div class="detail-card">
+
+                <p><strong>Shift :</strong><span id="preShift">Shift-I</span></p>
+
+              </div>
+              <div class="detail-card">
+
+                <p><strong>Events :</strong><span id="preEvents">Foot Ball</span></p>
+
+              </div>
+              <div class="detail-card">
+
+                <p><strong>Manager ID :</strong><span id="preManagerId">26SD101</span></p>
+
+              </div>
+              <div class="detail-card">
+
+                <p><strong>Password :</strong><span id="prePassword">SE23D7T</span></p>
+
+              </div>
+
+            </div>
+
+          </div>
+          
+          <div id="previewPlaceholder" style="text-align: center; padding: 40px 20px; color: #64748b; border: 2px dashed #cbd5e1; border-radius: 12px; background: #f8fafc;">
+             <p>Register a new manager to generate and view login details.</p>
+          </div>
+
+        </div>
+
+      </div>
+
+      <!-- --------------------Table---------------------------- -->
+      <div class="table-box">
+
+        <div class="table-header">
+
+          <h2>Existing Event Managers</h2>
+          <input type="search" placeholder="Search.........">
+
+        </div>
+
+        <table>
+
+          <thead>
+
+            <tr>
+              <th>Staff ID</th>
+              <th>Name</th>
+              <th>Manager ID</th>
+              <th>Contact</th>
+            </tr>
+
+          </thead>
+
+          <tbody id="managersTableBody">
+            <!-- Dynamically populated -->
+          </tbody>
+
+        </table>
+
+      </div>
+
+
+    </div>
+
+  <script src="../api.js"></script>
+  <script>
+    function esc(s) {
+        return String(s || '').replace(/&/g, '&amp;').replace(/</g, '&lt;').replace(/>/g, '&gt;');
+    }
+
+    async function loadEventManagers() {
+        try {
+            const depts = await DepartmentsAPI.getAll();
+            const tbody = document.getElementById('managersTableBody');
+            if (!tbody) return;
+
+            // Filter for event managers
+            const managers = depts.filter(d => d.role === 'event' || d.inCharge);
+            if (!managers.length) {
+                tbody.innerHTML = `<tr><td colspan="4" style="text-align:center; color:#64748b; padding:20px;">No event managers registered yet.</td></tr>`;
+                return;
+            }
+
+            tbody.innerHTML = managers.map(m => `
+                <tr>
+                    <td>${esc(m.deptId)}</td>
+                    <td>${esc(m.coordinator)}</td>
+                    <td>${esc(m.username)}</td>
+                    <td>${esc(m.phone)}</td>
+                </tr>
+            `).join('');
+        } catch (err) {
+            console.error("Failed to load event managers list:", err);
+        }
+    }
+
+    document.addEventListener("DOMContentLoaded", async () => {
+        // Session check — admin only
+        const session = await AuthAPI.getSession();
+        if (!session.authenticated || session.user.role !== 'admin') {
+            window.location.href = '../admin_login.html';
+            return;
+        }
+
+        // Wire up logout
+        const logoutLinks = document.querySelectorAll('a[href="#"]');
+        logoutLinks.forEach(link => {
+            if (link.textContent.trim().toLowerCase() === 'logout') {
+                link.addEventListener('click', async (e) => {
+                    e.preventDefault();
+                    await AuthAPI.logout();
+                    window.location.href = '../admin_login.html';
+                });
+            }
+        });
+
+        // Load managers
+        await loadEventManagers();
+
+        // Handle Event Manager Registration
+        const form = document.getElementById('addStaffForm');
+        if (form) {
+            form.addEventListener('submit', async (e) => {
+                e.preventDefault();
+                const submitBtn = form.querySelector('.submit-btn');
+                submitBtn.disabled = true;
+                submitBtn.textContent = 'Registering...';
+
+                const managerData = {
+                    department: document.getElementById('deptInput').value.trim(),
+                    coordinatorName: document.getElementById('nameInput').value.trim(),
+                    staffId: document.getElementById('staffIdInput').value.trim(),
+                    phone: document.getElementById('contactInput').value.trim(),
+                    shift: document.getElementById('shiftSelect').value,
+                    inCharge: document.getElementById('inChargeSelect').value
+                };
+
+                try {
+                    const res = await DepartmentsAPI.registerManager(managerData);
+                    if (res.success || res.username) {
+                        alert(res.message || "Event manager registered successfully!");
+
+                        // Update Preview Container
+                        document.getElementById('preHeader').textContent = `${managerData.coordinatorName} (${managerData.inCharge})`;
+                        document.getElementById('preStaffName').textContent = managerData.coordinatorName;
+                        document.getElementById('preContact').textContent = managerData.phone;
+                        document.getElementById('preShift').textContent = managerData.shift;
+                        document.getElementById('preEvents').textContent = managerData.inCharge;
+                        document.getElementById('preManagerId').textContent = res.username;
+                        document.getElementById('prePassword').textContent = res.password;
+
+                        // Logo circle initials
+                        const words = managerData.coordinatorName.split(/\s+/);
+                        const circle = document.getElementById('preCircleLogo');
+                        if (circle) {
+                            const initial1 = words[0] ? words[0][0] : '';
+                            const initial2 = words[1] ? words[1][0] : '';
+                            circle.textContent = (initial1 + initial2).toUpperCase();
+                        }
+
+                        // Toggle Preview panels
+                        document.getElementById('previewContainer').style.display = 'block';
+                        document.getElementById('previewPlaceholder').style.display = 'none';
+
+                        // Clear inputs and refresh list
+                        form.reset();
+                        await loadEventManagers();
+                    } else {
+                        alert("Failed to register event manager: " + (res.message || "Unknown error"));
+                    }
+                } catch (err) {
+                    console.error("Manager registration error:", err);
+                    alert("An error occurred during registration: " + err.message);
+                } finally {
+                    submitBtn.disabled = false;
+                    submitBtn.textContent = 'Add Staff';
+                }
+            });
+        }
+    });
+  </script>
+</body>
+</html>

@@ -1,0 +1,331 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Sports Day '26 – Profile</title>
+
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&display=swap" rel="stylesheet" />
+  <link rel="stylesheet" href="new_reg.css" />
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.2/css/all.min.css" />
+
+  <style>
+    .profile-grid {
+      display:grid;
+      grid-template-columns:1fr 1fr;
+      gap:24px;
+      margin-top:30px;
+    }
+    .profile-card {
+      padding:24px;
+      border-radius:18px;
+      background:#ffffff;
+      border:1px solid #e5e7eb;
+      box-shadow:0 10px 25px rgba(0,0,0,0.05);
+    }
+    .profile-card h2 {
+      margin-bottom:18px;
+      font-size:24px;
+      color:#111827;
+    }
+    .profile-item {
+      display:grid;
+      grid-template-columns:150px 1fr;
+      gap:10px 18px;
+      align-items:center;
+      margin-bottom:14px;
+      color:#374151;
+    }
+    .profile-label {
+      font-weight:600;
+      color:#1f2937;
+    }
+    .profile-value {
+      color:#4b5563;
+      word-break:break-word;
+    }
+    .status-pill {
+      display:inline-flex;
+      align-items:center;
+      gap:8px;
+      padding:10px 14px;
+      border-radius:999px;
+      background:#dcfce7;
+      color:#166534;
+      font-weight:700;
+    }
+    .profile-note {
+      margin-top:20px;
+      padding:18px;
+      border-radius:16px;
+      background:#eff6ff;
+      color:#1d4ed8;
+      border:1px solid #dbeafe;
+      line-height:1.7;
+    }
+    @media(max-width:900px){
+      .profile-grid {grid-template-columns:1fr;}
+    }
+  </style>
+</head>
+
+<body>
+  <div class="app-shell">
+
+    <!-- ═══ SIDEBAR ═══ -->
+    <aside class="sidebar" id="sidebar">
+      <div class="sidebar-brand">
+        <div class="brand-name">Sports Day <span>'26</span></div>
+        <div class="brand-suite">Department Central</div>
+      </div>
+      <nav class="sidebar-nav">
+        <a class="nav-item" href="index.html">
+          <i class="fa-solid fa-table-columns"></i>
+          Dashboard
+        </a>
+        <a class="nav-item" href="new_registration.html">
+          <i class="fa-solid fa-file-circle-plus"></i>
+          New Registration
+        </a>
+        <a class="nav-item" href="participants.html">
+          <i class="fa-solid fa-users"></i>
+          Participants
+        </a>
+        <a class="nav-item" href="result.html">
+          <i class="fa-solid fa-trophy"></i>
+          Results
+        </a>
+        <a class="nav-item active" href="profile.html">
+          <i class="fa-solid fa-gear"></i>
+          Profile
+        </a>
+      </nav>
+      <div class="sidebar-footer">
+        <a class="nav-item">Help Center</a>
+        <a href="dep_eve_login.html" class="nav-item logout-link">Logout</a>
+      </div>
+    </aside>
+
+    <!-- ═══ MAIN ═══ -->
+    <div class="main-wrapper">
+
+      <!-- TOP NAV -->
+      <header class="topnav">
+        <button class="hamburger" id="hamburger">&#9776;</button>
+        <div class="topnav-right">
+          <button class="icon-btn" aria-label="Notifications">
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" width="18" height="18">
+              <path d="M18 8A6 6 0 0 0 6 8c0 7-3 9-3 9h18s-3-2-3-9" />
+              <path d="M13.73 21a2 2 0 0 1-3.46 0" />
+            </svg>
+            <span class="badge">3</span>
+          </button>
+          <div class="avatar">JS</div>
+        </div>
+      </header>
+
+      <main class="content">
+
+      <div class="header">
+        <div class="header-text">
+          <h1>Profile</h1>
+          <p>Department login information, account details, and access settings for the management portal.</p>
+        </div>
+        <button class="btn">Edit Profile</button>
+      </div>
+
+      <div class="profile-grid">
+        <section class="profile-card">
+          <h2>Account Overview</h2>
+          <div class="profile-item">
+            <span class="profile-label">Department</span>
+            <span class="profile-value" id="profileDept">General Administration</span>
+          </div>
+          <div class="profile-item">
+            <span class="profile-label">Admin Name</span>
+            <span class="profile-value" id="profileName">System Administrator</span>
+          </div>
+          <div class="profile-item">
+            <span class="profile-label">Role</span>
+            <span class="profile-value" id="profileRole">Admin</span>
+          </div>
+          <div class="profile-item">
+            <span class="profile-label">Account Status</span>
+            <span class="profile-value"><span class="status-pill">Active</span></span>
+          </div>
+          <div class="profile-item">
+            <span class="profile-label">Member Since</span>
+            <span class="profile-value">January 10, 2026</span>
+          </div>
+        </section>
+
+        <section class="profile-card">
+          <h2>Login Details</h2>
+          <div class="profile-item">
+            <span class="profile-label">Username</span>
+            <span class="profile-value" id="profileUsername">admin</span>
+          </div>
+          <div class="profile-item">
+            <span class="profile-label">Password</span>
+            <span class="profile-value">************</span>
+          </div>
+          <div class="profile-item">
+            <span class="profile-label">Dashboard URL</span>
+            <span class="profile-value">./index.html</span>
+          </div>
+          <div class="profile-note">
+            Use these coordinator login details to access the Sports Day management portal. Keep your password secure and do not share it with unauthorized users.
+          </div>
+        </section>
+
+        <!-- ADMIN CONTROL CARD -->
+        <section class="profile-card" id="adminPanelCard" style="display:none; grid-column: 1 / -1; margin-top:20px;">
+          <h2 style="color:#0f6fff;"><i class="fa-solid fa-user-shield"></i> Admin Panel: Create Coordinator Account</h2>
+          <form id="createUserForm" style="display:grid; grid-template-columns: 1fr 1fr; gap: 16px;">
+            <div class="form-item" style="display:flex; flex-direction:column; gap:8px;">
+              <label style="font-weight:600; color:#1f2937;">Username</label>
+              <input type="text" id="newUsername" placeholder="e.g. cs_coord" required style="padding:10px; border-radius:8px; border:1px solid #d1d5db; font-size:14px; outline:none; transition:border 0.2s;" onfocus="this.style.borderColor='#0f6fff'" onblur="this.style.borderColor='#d1d5db'"/>
+            </div>
+            
+            <div class="form-item" style="display:flex; flex-direction:column; gap:8px;">
+              <label style="font-weight:600; color:#1f2937;">Display Name</label>
+              <input type="text" id="newDisplayName" placeholder="e.g. CS Coordinator" required style="padding:10px; border-radius:8px; border:1px solid #d1d5db; font-size:14px; outline:none; transition:border 0.2s;" onfocus="this.style.borderColor='#0f6fff'" onblur="this.style.borderColor='#d1d5db'"/>
+            </div>
+            
+            <div class="form-item" style="display:flex; flex-direction:column; gap:8px;">
+              <label style="font-weight:600; color:#1f2937;">Role</label>
+              <select id="newRole" required style="padding:10px; border-radius:8px; border:1px solid #d1d5db; font-size:14px; outline:none; background:#fff;" onchange="toggleRoleFields()">
+                <option value="dept">Department Coordinator</option>
+                <option value="event">Event Coordinator</option>
+              </select>
+            </div>
+
+            <div class="form-item" style="display:flex; flex-direction:column; gap:8px;">
+              <label style="font-weight:600; color:#1f2937;">Password</label>
+              <input type="password" id="newPassword" placeholder="e.g. password123" required style="padding:10px; border-radius:8px; border:1px solid #d1d5db; font-size:14px; outline:none; transition:border 0.2s;" onfocus="this.style.borderColor='#0f6fff'" onblur="this.style.borderColor='#d1d5db'"/>
+            </div>
+
+            <div class="form-item" id="deptField" style="display:flex; flex-direction:column; gap:8px;">
+              <label style="font-weight:600; color:#1f2937;">Department</label>
+              <input type="text" id="newDepartment" placeholder="e.g. Computer Science" style="padding:10px; border-radius:8px; border:1px solid #d1d5db; font-size:14px; outline:none;" />
+            </div>
+
+            <div class="form-item" id="eventField" style="display:none; flex-direction:column; gap:8px;">
+              <label style="font-weight:600; color:#1f2937;">Assigned Event ID</label>
+              <input type="text" id="newEventId" placeholder="e.g. sprint" style="padding:10px; border-radius:8px; border:1px solid #d1d5db; font-size:14px; outline:none;" />
+            </div>
+
+            <button type="submit" style="grid-column: 1 / -1; margin-top:10px; padding:12px; border-radius:8px; border:none; background:#0f6fff; color:#fff; font-weight:700; cursor:pointer; font-size:15px; box-shadow:0 6px 20px rgba(15,111,255,0.25); transition:transform 0.2s, background 0.2s;" onmouseover="this.style.background='#0052cc'; this.style.transform='translateY(-1px)'" onmouseout="this.style.background='#0f6fff'; this.style.transform='none'">
+              <i class="fa-solid fa-user-plus"></i> Create Coordinator Account
+            </button>
+          </form>
+        </section>
+      </div>
+    </main>
+
+      <footer class="site-footer">
+        <nav class="footer-links"><a href="#">Privacy Policy</a><a href="#">Terms of Service</a><a href="#">Contact Support</a></nav>
+        <span>© 2026 Sports Day Management System</span>
+      </footer>
+    </div>
+  </div>
+
+  <script src="api.js"></script>
+  <script>
+    function toggleRoleFields() {
+        const role = document.getElementById('newRole').value;
+        const deptField = document.getElementById('deptField');
+        const eventField = document.getElementById('eventField');
+        if (role === 'dept') {
+            deptField.style.display = 'flex';
+            eventField.style.display = 'none';
+        } else {
+            deptField.style.display = 'none';
+            eventField.style.display = 'flex';
+        }
+    }
+
+    document.addEventListener("DOMContentLoaded", async () => {
+        // Load active session
+        try {
+            const session = await AuthAPI.getSession();
+            if (session && session.authenticated) {
+                const user = session.user;
+                document.getElementById('profileName').textContent = user.displayName;
+                document.getElementById('profileUsername').textContent = user.username;
+                document.getElementById('profileRole').textContent = 
+                    user.role === 'admin' ? 'System Administrator' : 
+                    user.role === 'dept' ? 'Department Coordinator' : 'Event Coordinator';
+                
+                document.getElementById('profileDept').textContent = 
+                    user.role === 'admin' ? 'General Administration' :
+                    user.role === 'dept' ? (user.department || 'General') : `Event Management (${user.event || 'General'})`;
+
+                // If admin, show create user card
+                if (user.role === 'admin') {
+                    document.getElementById('adminPanelCard').style.display = 'block';
+                }
+            } else {
+                console.warn("No active session. Redirecting to login...");
+                window.location.href = 'dep_eve_login.html';
+            }
+        } catch (err) {
+            console.error("Failed to load session:", err);
+        }
+
+        // Hook up logout link
+        const logoutBtns = document.querySelectorAll('a[href="dep_eve_login.html"]');
+        logoutBtns.forEach(btn => {
+            btn.addEventListener('click', async (e) => {
+                e.preventDefault();
+                try {
+                    await AuthAPI.logout();
+                } catch (err) {
+                    console.error("Logout failed:", err);
+                }
+                window.location.href = 'dep_eve_login.html';
+            });
+        });
+
+        // Hook up user creation form submit
+        const createUserForm = document.getElementById('createUserForm');
+        if (createUserForm) {
+            createUserForm.addEventListener('submit', async (e) => {
+                e.preventDefault();
+                const username = document.getElementById('newUsername').value;
+                const displayName = document.getElementById('newDisplayName').value;
+                const role = document.getElementById('newRole').value;
+                const password = document.getElementById('newPassword').value;
+                
+                const userData = { username, displayName, role, password };
+                if (role === 'dept') {
+                    userData.department = document.getElementById('newDepartment').value || 'General';
+                } else {
+                    userData.event = document.getElementById('newEventId').value || 'general';
+                }
+
+                try {
+                    const result = await AuthAPI.createUser(userData);
+                    if (result.success) {
+                        alert(`Account for ${displayName} created successfully!`);
+                        createUserForm.reset();
+                    } else {
+                        alert(`Error: ${result.message}`);
+                    }
+                } catch (err) {
+                    alert(`Failed to create account: ${err.message}`);
+                }
+            });
+        }
+    });
+  </script>
+
+  <script>
+    const hb=document.getElementById('hamburger'),sb=document.getElementById('sidebar');
+    if(hb&&sb){hb.addEventListener('click',()=>sb.classList.toggle('open'));document.addEventListener('click',(e)=>{if(!sb.contains(e.target)&&!hb.contains(e.target))sb.classList.remove('open');});}
+  </script>
+</body>
+</html>
+

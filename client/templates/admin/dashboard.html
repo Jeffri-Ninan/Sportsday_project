@@ -1,0 +1,305 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Admin Dashboard</title>
+
+    <link rel="stylesheet" href="style.css">
+
+</head>
+<body>
+
+
+  <div class="container">
+   <!-- ----------------------Sidebar---------------------------- --> 
+    <div class="sidebar">
+     
+      <aside>
+        <ul class="menu">
+          <h2>Sports Day'26</h2>
+          <h4>Managing Athletics'26</h4>
+          <li><a href="dashboard.html" class="active">Dashboard</a></li>
+          <li><a href="deptcenter.html">Department Center</a></li>
+          <li><a href="staffcontrol.html">Staff Control</a></li>
+          <li><a href="event-control.html">Event Control</a></li>
+          <li><a href="eventlogs.html">Event Logs</a></li>
+        </ul>
+
+        <div class="bottom-menu">
+          <ul>
+            <li><a href="#">Help Center</a></li>
+            <li><a href="#">Logout</a></li>
+          </ul>
+        </div>
+
+      </aside>
+
+    </div>
+
+    <!-- -----------------------Main Content---------------------------- -->
+    <div class="main-content">
+      
+      <div class="top-bar">
+        <div class="title-group">
+          <h2>Welcome,Admin!</h2>
+          <p>Here you can manage all aspects of Sports Day '26, including events, departments, staff and results.</p>
+        </div>
+        
+        <div class="quickbtn">
+          <a href="event-control.html" class="btn">Add Event</a>
+          <a href="deptcenter.html" class="btn">Add Department</a> 
+          <a href="staffcontrol.html" class="btn">Add Staff</a>
+        </div>
+
+      </div>
+
+      <!-- ------------------cards----------------- -->
+      <div class="cards">
+        <div class="card">
+          <h3 id="statTotalRegistrations">0</h3>
+          <p>Total Registrations</p>
+        </div>
+
+        <div class="card">
+          <h3 id="statTotalEvents">0</h3>
+          <p>Total Events</p>
+        </div>
+
+        <div class="card">
+          <h3 id="statTotalStudents">0</h3>
+          <p>Total Students</p>
+        </div>
+
+        <div class="card">
+          <h3 id="statCompletedEvents">0</h3>
+          <p>Completed Events</p>
+        </div>
+      </div>
+
+      <!-- ---------------------Chart------------------- -->
+      <div class="chart-container">
+        <div class="chart">
+          <h3>Event Status Overview</h3>
+          <div class="circle-chart">
+
+            <div class="inner-circle">
+              <h1 id="circleTotalEvents">0</h1>
+              <p>Total</p>
+            </div>
+
+          </div>
+
+          <div class="status-list">
+
+            <div class="status">
+              <span class="dot dark"></span>
+              <p class="state" >Upcoming</p>
+              <span id="circleUpcomingEvents">0</span>
+            </div>
+
+            <div class="status">
+              <span class="dot medium"></span>
+              <p class="state" >Ongoing</p>
+              <span id="circleOngoingEvents">0</span>
+            </div>
+
+            <div class="status">
+              <span class="dot light"></span>
+              <p class="state" >Completed</p>
+              <span id="circleCompletedEvents">0</span>
+            </div>
+
+          </div>
+
+        </div>
+
+        <div class="chart-bar">
+          <h3>Department Scores</h3>
+          
+          <div id="deptScoresContainer">
+             <!-- Rendered dynamically -->
+          </div>
+
+        </div>
+
+      </div>
+
+      <!-- -------------------------Table-------------------------- -->
+      <div class="table-box">
+
+        <div class="table-header">
+
+          <h2>Recent Updates</h2>
+          <a href="eventlogs.html">View All</a>
+
+        </div>
+
+        <table>
+
+          <thead>
+
+            <tr>
+              <th>EVENT</th>
+              <th>CATEGORY</th>
+              <th>COORDINATOR</th>
+              <th>STATUS</th>
+            </tr>
+
+          </thead>
+
+          <tbody id="recentUpdatesBody">
+             <!-- Rendered dynamically -->
+          </tbody>
+
+        </table>
+
+      </div>
+
+
+    </div>
+
+  </div>
+
+  <script src="../api.js"></script>
+  <script>
+    document.addEventListener("DOMContentLoaded", async () => {
+        // 1. Session verification (localStorage-based for file:// compatibility)
+        const session = await AuthAPI.getSession();
+        if (!session.authenticated || session.user.role !== 'admin') {
+            window.location.href = '../admin_login.html';
+            return;
+        }
+
+        // Show welcome name
+        const welcomeEl = document.querySelector('.title-group h2');
+        if (welcomeEl && session.user.displayName) {
+            welcomeEl.textContent = `Welcome, ${session.user.displayName}!`;
+        }
+
+        // 2. Wire up logout
+        const logoutLinks = document.querySelectorAll('a[href="#"]');
+        logoutLinks.forEach(link => {
+            if (link.textContent.trim().toLowerCase() === 'logout') {
+                link.addEventListener('click', async (e) => {
+                    e.preventDefault();
+                    await AuthAPI.logout();
+                    window.location.href = '../admin_login.html';
+                });
+            }
+        });
+
+        // 3. Load dynamic database statistics
+        await loadDashboardStats();
+    });
+
+    async function loadDashboardStats() {
+        try {
+            // Fetch everything
+            const [registrations, events, results] = await Promise.all([
+                RegistrationsAPI.getAll(),
+                EventsAPI.getAll(),
+                ResultsAPI.getAll()
+            ]);
+
+            // Calculate registration statistics
+            const totalRegs = registrations.length;
+            let totalStudents = 0;
+            const deptScores = {};
+
+            registrations.forEach(reg => {
+                if (reg.players && Array.isArray(reg.players)) {
+                    totalStudents += reg.players.length;
+                }
+            });
+
+            // Calculate department points from seeded results
+            results.forEach(res => {
+                const standings = res.standings || [];
+                standings.forEach(item => {
+                    const dept = item.department || 'General';
+                    // Seed some simple points: 1st gets 10 pts, 2nd gets 5 pts, 3rd gets 2 pts
+                    let points = 0;
+                    if (item.rank === 1) points = 10;
+                    else if (item.rank === 2) points = 5;
+                    else if (item.rank === 3) points = 2;
+
+                    deptScores[dept] = (deptScores[dept] || 0) + points;
+                });
+            });
+
+            // Set dashboard values
+            document.getElementById('statTotalRegistrations').textContent = totalRegs;
+            document.getElementById('statTotalEvents').textContent = events.length;
+            document.getElementById('statTotalStudents').textContent = totalStudents;
+            document.getElementById('statCompletedEvents').textContent = results.length;
+
+            // Update status counts (mocking some dynamic calculations)
+            const completedCount = results.length;
+            const ongoingCount = Math.min(3, events.length - completedCount);
+            const upcomingCount = Math.max(0, events.length - completedCount - ongoingCount);
+
+            document.getElementById('circleTotalEvents').textContent = events.length;
+            document.getElementById('circleCompletedEvents').textContent = completedCount;
+            document.getElementById('circleOngoingEvents').textContent = ongoingCount;
+            document.getElementById('circleUpcomingEvents').textContent = upcomingCount;
+
+            // Render department scores
+            const deptScoresContainer = document.getElementById('deptScoresContainer');
+            deptScoresContainer.innerHTML = '';
+            
+            // Sort departments by points descending
+            const sortedDepts = Object.entries(deptScores).sort((a, b) => b[1] - a[1]);
+            if (sortedDepts.length === 0) {
+                // Fallback list
+                sortedDepts.push(["Computer Science", 22], ["Botany", 20], ["IT", 18], ["BCom", 16]);
+            }
+
+            sortedDepts.forEach(([dept, score]) => {
+                const pct = Math.min(100, Math.round((score / 30) * 100));
+                const scoreBox = document.createElement('div');
+                scoreBox.className = 'score-box';
+                scoreBox.innerHTML = `
+                    <div class="score-title">
+                      <span>${dept}</span>
+                      <span>${score} pts</span>
+                    </div>
+                    <div class="progress-bar">
+                      <div class="progress" style="width: ${pct}%"></div>
+                    </div>
+                `;
+                deptScoresContainer.appendChild(scoreBox);
+            });
+
+            // Render Recent Updates table
+            const recentUpdatesBody = document.getElementById('recentUpdatesBody');
+            recentUpdatesBody.innerHTML = '';
+
+            // Take the last 3 registrations
+            const recentRegs = registrations.slice(-3).reverse();
+            if (recentRegs.length === 0) {
+                recentUpdatesBody.innerHTML = '<tr><td colspan="4" style="text-align:center;">No recent registrations available.</td></tr>';
+            } else {
+                recentRegs.forEach(reg => {
+                    const eventName = reg.event || reg.eventId || 'Unknown Event';
+                    const category = reg.type === 'team' ? 'Team' : 'Solo';
+                    const leader = (reg.players && reg.players[0]) ? reg.players[0].name : '—';
+                    
+                    const tr = document.createElement('tr');
+                    tr.innerHTML = `
+                        <td>${eventName}</td>
+                        <td>${category}</td>
+                        <td>${leader}</td>
+                        <td class="completed">Registered</td>
+                    `;
+                    recentUpdatesBody.appendChild(tr);
+                });
+            }
+
+        } catch (err) {
+            console.error("Error loading dashboard stats:", err);
+        }
+    }
+  </script>
+</body>
+</html>

@@ -1,0 +1,626 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+  <title>Team Event Registration</title>
+
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+  <link rel="stylesheet"
+    href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.2/css/all.min.css"/>
+  <link rel="stylesheet" href="new_reg.css">
+  <link rel="stylesheet" href="team_reg.css">
+</head>
+
+<body>
+
+<div class="app-shell">
+
+  <!-- ═══ SIDEBAR ═══ -->
+  <aside class="sidebar" id="sidebar">
+    <div class="sidebar-brand">
+      <div class="brand-name">Sports Day <span>'26</span></div>
+      <div class="brand-suite">Department Central</div>
+    </div>
+    <nav class="sidebar-nav">
+      <a class="nav-item" href="index.html">
+        <i class="fa-solid fa-table-columns"></i>
+        Dashboard
+      </a>
+      <a class="nav-item active" href="new_registration.html">
+        <i class="fa-solid fa-file-circle-plus"></i>
+        New Registration
+      </a>
+      <a class="nav-item" href="participants.html">
+        <i class="fa-solid fa-users"></i>
+        Participants
+      </a>
+      <a class="nav-item" href="result.html">
+        <i class="fa-solid fa-trophy"></i>
+        Results
+      </a>
+      <a class="nav-item" href="profile.html">
+        <i class="fa-solid fa-gear"></i>
+        Profile
+      </a>
+    </nav>
+    <div class="sidebar-footer">
+      <a class="nav-item">Help Center</a>
+      <a href="dep_eve_login.html" class="nav-item logout-link">Logout</a>
+    </div>
+  </aside>
+
+  <!-- ═══ MAIN ═══ -->
+  <div class="main-wrapper">
+
+    <!-- TOP NAV -->
+    <header class="topnav">
+      <button class="hamburger" id="hamburger">&#9776;</button>
+      <div class="topnav-right">
+        <button class="icon-btn" aria-label="Notifications">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" width="18" height="18">
+            <path d="M18 8A6 6 0 0 0 6 8c0 7-3 9-3 9h18s-3-2-3-9" />
+            <path d="M13.73 21a2 2 0 0 1-3.46 0" />
+          </svg>
+          <span class="badge">3</span>
+        </button>
+        <div class="avatar">JS</div>
+      </div>
+    </header>
+
+    <main class="content">
+
+    <div class="breadcrumb">
+      Events › Team Events › Cricket › Register
+    </div>
+
+    <h1 class="title">
+      Register for Cricket
+    </h1>
+
+    <p class="subtitle">
+      Fill in the details below to register your team.
+    </p>
+
+    <div class="layout">
+
+      <!-- LEFT SIDE -->
+
+      <div>
+
+        <!-- TEAM INFO -->
+
+        <div class="card">
+
+          <h2 class="section-title">
+            Team Information
+          </h2>
+
+          <div class="form-grid">
+
+            <div class="form-group full">
+              <label>Team Name *</label>
+              <input type="text" id="teamName" placeholder="Enter team name">
+            </div>
+
+            <div class="form-group full">
+              <label>Department</label>
+              <input type="text" id="deptDisplay" placeholder="Loading department..." readonly
+                style="background:#f1f5f9; color:#475569; cursor:not-allowed; font-weight:600;">
+            </div>
+
+          </div>
+
+        </div>
+
+        <!-- TEAM LEADER -->
+
+        <div class="card">
+
+          <h2 class="section-title">
+            Team Leader
+          </h2>
+
+          <div class="form-grid">
+
+            <div class="form-group">
+              <label>Full Name *</label>
+              <input type="text" id="leaderName" placeholder="Full name">
+            </div>
+
+            <div class="form-group">
+              <label>Email *</label>
+              <input type="email" id="leaderEmail" placeholder="Email address">
+            </div>
+
+            <div class="form-group">
+              <label>Register Number *</label>
+              <input type="text" id="leaderRegno" placeholder="Register number">
+            </div>
+
+            <div class="form-group">
+              <label>Phone Number *</label>
+              <input type="text" id="leaderPhone" placeholder="Phone number">
+            </div>
+
+            <div class="form-group">
+              <label>Year *</label>
+              <select id="leaderYear">
+                <option value="">Select year</option>
+                <option>UG 1st Year</option>
+                <option>UG 2nd Year</option>
+                <option>UG 3rd Year</option>
+                <option>PG 1st Year</option>
+                <option>PG 2nd Year</option>
+              </select>
+            </div>
+
+            <div class="form-group">
+              <label>Gender *</label>
+              <select id="leaderGender">
+                <option value="">Select gender</option>
+                <option>Male</option>
+                <option>Female</option>
+                <option>Others</option>
+              </select>
+            </div>
+
+          </div>
+
+        </div>
+
+        <!-- OTHER PLAYERS -->
+
+        <div class="card">
+
+          <h2 class="section-title">
+            Other Players
+          </h2>
+
+          <div id="players-container">
+
+            <!-- PLAYER 2 -->
+
+            <div class="player-card">
+
+              <div class="player-header">
+
+                <div class="player-title">
+                  Player 2
+                </div>
+
+                <button
+                  class="delete-btn"
+                  onclick="deletePlayer(this)"
+                >
+                  Delete
+                </button>
+
+              </div>
+
+              <div class="form-grid">
+
+                <div class="form-group">
+                  <label>Name *</label>
+                  <input type="text" class="player-name-input" placeholder="Full name">
+                </div>
+
+                <div class="form-group">
+                  <label>Register No. *</label>
+                  <input type="text" class="player-regno-input" placeholder="Register No">
+                </div>
+
+                <div class="form-group">
+                  <label>Phone *</label>
+                  <input type="text" class="player-phone-input" placeholder="Phone number">
+                </div>
+
+                <div class="form-group">
+                  <label>Gender *</label>
+                  <select class="player-gender-select">
+                    <option value="">Select gender</option>
+                    <option>Male</option>
+                    <option>Female</option>
+                    <option>Others</option>
+                  </select>
+                </div>
+
+                <div class="form-group">
+                  <label>Year *</label>
+                  <select class="player-year-select">
+                    <option value="">Select year</option>
+                    <option>UG 1st Year</option>
+                    <option>UG 2nd Year</option>
+                    <option>UG 3rd Year</option>
+                    <option>PG 1st Year</option>
+                    <option>PG 2nd Year</option>
+                  </select>
+                </div>
+
+              </div>
+
+            </div>
+
+          </div>
+
+          <button
+            class="btn btn-add"
+            onclick="addPlayer()"
+          >
+            + Add New Player
+          </button>
+
+        </div>
+
+        <!-- TERMS -->
+
+        <div class="card">
+
+          <div class="terms">
+
+            <input type="checkbox" id="termsCheck">
+
+            <p>
+              I confirm that all team members agree to participate and follow Sports Day rules.
+            </p>
+
+          </div>
+
+        </div>
+
+        <!-- BUTTONS -->
+
+        <div class="buttons">
+
+          <button class="btn btn-cancel" onclick="window.location.href='new_registration.html'">
+            Cancel
+          </button>
+
+          <button class="btn btn-register" id="submitBtn">
+            Register Team →
+          </button>
+
+        </div>
+
+      </div>
+
+      <!-- RIGHT SIDE -->
+
+      <div>
+
+        <div class="event-card">
+
+          <img
+            class="event-image"
+            id="eventImage"
+            src="../src/assets/images/LOGO.png"
+            alt="Event Image"
+          >
+
+          <div class="event-content">
+
+            <h2 class="event-title" id="eventTitle">
+              Event Title
+            </h2>
+
+            <p class="event-info" id="eventSubtype">
+              Team Event
+            </p>
+
+            <p class="event-info" id="eventDate">
+              📅 Date
+            </p>
+
+            <p class="event-info" id="eventTime">
+              ⏰ Time
+            </p>
+
+            <p class="event-info" id="eventVenue">
+              📍 Venue
+            </p>
+
+          </div>
+
+        </div>
+
+        <div class="info-box">
+
+          <h3>Registration Tips</h3>
+
+          <ul>
+            <li>Ensure all player details are correct.</li>
+            <li>Minimum team players must be registered.</li>
+            <li>Bring ID card on event day.</li>
+            <li>Team leader should report 30 minutes early.</li>
+          </ul>
+
+        </div>
+
+        <div class="info-box">
+
+          <h3>Event Rules</h3>
+
+          <ul>
+            <li>Follow referee instructions.</li>
+            <li>Maintain sportsmanship.</li>
+            <li>Late teams may be disqualified.</li>
+            <li>Use proper sports attire.</li>
+          </ul>
+
+        </div>
+
+      </div>
+
+    </div>
+
+    <footer>
+
+      <div>
+        Privacy Policy &nbsp;&nbsp;
+        Terms of Service &nbsp;&nbsp;
+        Contact Support
+      </div>
+
+      <div>
+        © 2026 Sports Day Management System
+      </div>
+
+    </footer>
+
+    </main>
+
+    <footer class="site-footer">
+      <nav class="footer-links"><a href="#">Privacy Policy</a><a href="#">Terms of Service</a><a href="#">Contact Support</a></nav>
+      <span>© 2026 Sports Day Management System</span>
+    </footer>
+  </div>
+</div>
+
+<!-- ================= JAVASCRIPT ================= -->
+
+<script src="../src/assets/assets.js"></script>
+<script src="api.js"></script>
+<script>
+  const EVENT_DATA = {
+    football: { displayName:'Football Championship', subtype:'Team Event', date:'Oct 26, 2026', time:'09:30 AM – 06:30 PM', venue:'Main Stadium Pitch', minPlayers: 6 },
+    cricket: { displayName:'Cricket Tournament', subtype:'Team Event', date:'Oct 27, 2026', time:'07:00 AM – 07:00 PM', venue:'Cricket Ground', minPlayers: 11 },
+    basketball: { displayName:'3×3 Basketball', subtype:'Team Event', date:'Oct 26, 2026', time:'08:00 AM – 05:00 PM', venue:'Indoor Sports Complex', minPlayers: 3 },
+    volleyball: { displayName:'Volleyball Championship', subtype:'Team Event', date:'Oct 28, 2026', time:'09:00 AM – 05:00 PM', venue:'Volleyball Courts', minPlayers: 6 }
+  };
+
+  let activeEventId = 'cricket';
+  let playerCount = 2;
+
+  document.addEventListener("DOMContentLoaded", async () => {
+    // 1. Session verification — get department from session
+    let sessionDept = '';
+    try {
+        const session = await AuthAPI.getSession();
+        if (!session.authenticated) {
+            window.location.href = 'dep_eve_login.html';
+            return;
+        }
+        sessionDept = session.user.department || '';
+        const deptField = document.getElementById('deptDisplay');
+        if (deptField) {
+            deptField.value = sessionDept || 'Not Assigned';
+        }
+    } catch (err) {
+        window.location.href = 'dep_eve_login.html';
+        return;
+    }
+
+    // Hook up logout
+    const logoutLinks = document.querySelectorAll('a[href="#"]');
+    logoutLinks.forEach(link => {
+        if (link.textContent.trim().toLowerCase() === 'logout') {
+            link.addEventListener("click", async (e) => {
+                e.preventDefault();
+                await AuthAPI.logout();
+                window.location.href = 'dep_eve_login.html';
+            });
+        }
+    });
+
+    // 2. Parse Event query param
+    const params = new URLSearchParams(window.location.search);
+    activeEventId = params.get('event') || 'cricket';
+    const eventDetails = EVENT_DATA[activeEventId];
+
+    if (eventDetails) {
+        document.getElementById('eventTitle').textContent = eventDetails.displayName;
+        document.getElementById('eventSubtype').textContent = eventDetails.subtype;
+        document.getElementById('eventDate').textContent = '📅 ' + eventDetails.date;
+        document.getElementById('eventTime').textContent = '⏰ ' + eventDetails.time;
+        document.getElementById('eventVenue').textContent = '📍 ' + eventDetails.venue;
+        
+        if (typeof ASSETS !== 'undefined' && ASSETS[activeEventId]) {
+            document.getElementById('eventImage').src = ASSETS[activeEventId];
+        }
+
+        document.querySelector('.breadcrumb').textContent = `Events › Team Events › ${eventDetails.displayName} › Register`;
+        document.querySelector('.title').textContent = `Register for ${eventDetails.displayName}`;
+    }
+
+    // 3. Form Submission logic
+    const submitBtn = document.getElementById('submitBtn');
+    submitBtn.addEventListener('click', async (e) => {
+        e.preventDefault();
+
+        const teamName = document.getElementById('teamName').value.trim();
+        const leaderName = document.getElementById('leaderName').value.trim();
+        const leaderEmail = document.getElementById('leaderEmail').value.trim();
+        const leaderRegno = document.getElementById('leaderRegno').value.trim();
+        const leaderPhone = document.getElementById('leaderPhone').value.trim();
+        const leaderYear = document.getElementById('leaderYear').value;
+        const leaderGender = document.getElementById('leaderGender').value;
+        const termsCheck = document.getElementById('termsCheck').checked;
+
+        if (!teamName || !leaderName || !leaderEmail || !leaderRegno || !leaderPhone || !leaderYear || !leaderGender) {
+            alert("Please fill in all team leader and team name fields.");
+            return;
+        }
+
+        if (!termsCheck) {
+            alert("You must agree to the tournament participation rules.");
+            return;
+        }
+
+        // Roster collection
+        const playersList = [
+            {
+                name: leaderName,
+                regno: leaderRegno,
+                email: leaderEmail,
+                year: leaderYear,
+                gender: leaderGender,
+                phone: leaderPhone,
+                isLeader: true
+            }
+        ];
+
+        const otherCards = document.querySelectorAll('#players-container .player-card');
+        let hasErrors = false;
+        
+        otherCards.forEach((card, index) => {
+            const nameInput = card.querySelector('.player-name-input').value.trim();
+            const regnoInput = card.querySelector('.player-regno-input').value.trim();
+            const phoneInput = card.querySelector('.player-phone-input').value.trim();
+            const genderSelect = card.querySelector('.player-gender-select').value;
+            const yearSelect = card.querySelector('.player-year-select').value;
+
+            if (!nameInput || !regnoInput || !phoneInput || !genderSelect || !yearSelect) {
+                hasErrors = true;
+                return;
+            }
+
+            playersList.push({
+                name: nameInput,
+                regno: regnoInput,
+                email: `${regnoInput.toLowerCase()}@dep.sports.edu`, // Auto-generated placeholder email for teams
+                year: yearSelect,
+                gender: genderSelect,
+                phone: phoneInput,
+                isLeader: false
+            });
+        });
+
+        if (hasErrors) {
+            alert("Please fill in all details for all added team players.");
+            return;
+        }
+
+        if (eventDetails && playersList.length < eventDetails.minPlayers) {
+            alert(`Minimum required players for ${eventDetails.displayName} is ${eventDetails.minPlayers}. Currently added: ${playersList.length}.`);
+            return;
+        }
+
+        const payload = {
+            event: eventDetails ? eventDetails.displayName : activeEventId,
+            eventId: activeEventId,
+            type: 'team',
+            department: sessionDept,
+            teamName: teamName,
+            players: playersList
+        };
+
+        try {
+            submitBtn.disabled = true;
+            submitBtn.textContent = "Registering...";
+            
+            await RegistrationsAPI.create(payload);
+            alert("Team registration successful!");
+            window.location.href = 'participants.html';
+        } catch (err) {
+            console.error("Team registration failed:", err);
+            alert("Registration failed: " + err.message);
+        } finally {
+            submitBtn.disabled = false;
+            submitBtn.textContent = "Register Team →";
+        }
+    });
+  });
+
+  function addPlayer(){
+    playerCount++;
+    const container = document.getElementById("players-container");
+    const playerCard = document.createElement("div");
+    playerCard.className = "player-card";
+    playerCard.innerHTML = `
+      <div class="player-header">
+        <div class="player-title">
+          Player ${playerCount}
+        </div>
+        <button
+          class="delete-btn"
+          onclick="deletePlayer(this)"
+        >
+          Delete
+        </button>
+      </div>
+      <div class="form-grid">
+        <div class="form-group">
+          <label>Name *</label>
+          <input type="text" class="player-name-input" placeholder="Full name">
+        </div>
+        <div class="form-group">
+          <label>Register No. *</label>
+          <input type="text" class="player-regno-input" placeholder="Register No">
+        </div>
+        <div class="form-group">
+          <label>Phone *</label>
+          <input type="text" class="player-phone-input" placeholder="Phone number">
+        </div>
+        <div class="form-group">
+          <label>Gender *</label>
+          <select class="player-gender-select">
+            <option value="">Select gender</option>
+            <option>Male</option>
+            <option>Female</option>
+            <option>Others</option>
+          </select>
+        </div>
+        <div class="form-group">
+          <label>Year *</label>
+          <select class="player-year-select">
+            <option value="">Select year</option>
+            <option>UG 1st Year</option>
+            <option>UG 2nd Year</option>
+            <option>UG 3rd Year</option>
+            <option>PG 1st Year</option>
+            <option>PG 2nd Year</option>
+          </select>
+        </div>
+      </div>
+    `;
+    container.appendChild(playerCard);
+    updatePlayerNumbers();
+  }
+
+  function deletePlayer(button){
+    const playerCard = button.closest(".player-card");
+    playerCard.remove();
+    updatePlayerNumbers();
+  }
+
+  function updatePlayerNumbers(){
+    const players = document.querySelectorAll("#players-container .player-card");
+    players.forEach((player, index) => {
+      const title = player.querySelector(".player-title");
+      title.innerText = `Player ${index + 2}`;
+    });
+    playerCount = players.length + 1;
+  }
+
+  const hb=document.getElementById('hamburger'),sb=document.getElementById('sidebar');
+  if(hb&&sb){hb.addEventListener('click',()=>sb.classList.toggle('open'));document.addEventListener('click',(e)=>{if(!sb.contains(e.target)&&!hb.contains(e.target))sb.classList.remove('open');});}
+</script>
+
+</body>
+</html>
+

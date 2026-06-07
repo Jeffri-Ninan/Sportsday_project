@@ -1,0 +1,620 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width,initial-scale=1.0" />
+  <title>Sports Day '26 – New Registration</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&display=swap"
+    rel="stylesheet" />
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.2/css/all.min.css" />
+  <link rel="stylesheet" href="new_reg.css" />
+  <style>
+    /* Additional Styles for Event Modal Detail View */
+    .modal-backdrop {
+      position: fixed;
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 100%;
+      background: rgba(15, 23, 42, 0.6);
+      backdrop-filter: blur(4px);
+      z-index: 1000;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      opacity: 0;
+      pointer-events: none;
+      transition: opacity 0.3s ease;
+    }
+    .modal-backdrop.open {
+      opacity: 1;
+      pointer-events: auto;
+    }
+    .modal-container {
+      background: var(--white);
+      border-radius: var(--radius);
+      width: 90%;
+      max-width: 500px;
+      overflow: hidden;
+      box-shadow: var(--shadow-lg);
+      transform: translateY(20px);
+      transition: transform 0.3s ease;
+    }
+    .modal-backdrop.open .modal-container {
+      transform: translateY(0);
+    }
+    .modal-header-img {
+      width: 100%;
+      height: 200px;
+      object-fit: cover;
+      display: block;
+    }
+    .modal-body {
+      padding: 24px;
+    }
+    .modal-title-row {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      margin-bottom: 12px;
+    }
+    .modal-title-row h2 {
+      font-size: 20px;
+      font-weight: 800;
+      color: var(--g800);
+    }
+    .modal-badge {
+      background: var(--blue-l);
+      color: var(--blue);
+      font-weight: 600;
+      font-size: 11px;
+      padding: 4px 10px;
+      border-radius: 20px;
+    }
+    .modal-meta-list {
+      display: flex;
+      flex-direction: column;
+      gap: 10px;
+      margin-bottom: 18px;
+      padding-bottom: 16px;
+      border-bottom: 1px solid var(--g100);
+    }
+    .modal-meta-item {
+      display: flex;
+      align-items: center;
+      gap: 8px;
+      font-size: 13px;
+      color: var(--g600);
+    }
+    .modal-meta-item svg {
+      stroke: var(--g400);
+      flex-shrink: 0;
+    }
+    .modal-actions {
+      display: flex;
+      justify-content: flex-end;
+    }
+    .modal-close-btn {
+      padding: 8px 20px;
+      background: var(--g100);
+      color: var(--g600);
+      border: none;
+      border-radius: 8px;
+      font-weight: 600;
+      font-size: 13px;
+      cursor: pointer;
+      transition: background 0.2s ease;
+    }
+    .modal-close-btn:hover {
+      background: var(--g200);
+    }
+  </style>
+</head>
+
+<body>
+  <div class="app-shell">
+
+    <!-- ═══ SIDEBAR ═══ -->
+    <aside class="sidebar" id="sidebar">
+      <div class="sidebar-brand">
+        <div class="brand-name">Sports Day <span>'26</span></div>
+        <div class="brand-suite">Department Central</div>
+      </div>
+      <nav class="sidebar-nav">
+        <a class="nav-item" href="index.html">
+          <i class="fa-solid fa-table-columns"></i>
+          Dashboard
+        </a>
+        <a class="nav-item active" href="new_registration.html">
+          <i class="fa-solid fa-file-circle-plus"></i>
+          New Registration
+        </a>
+        <a class="nav-item" href="participants.html">
+          <i class="fa-solid fa-users"></i>
+          Participants
+        </a>
+        <a class="nav-item" href="result.html">
+          <i class="fa-solid fa-trophy"></i>
+          Results
+        </a>
+        <a class="nav-item" href="profile.html">
+          <i class="fa-solid fa-gear"></i>
+          Profile
+        </a>
+      </nav>
+      <div class="sidebar-footer">
+        <a class="nav-item">
+          Help Center
+        </a>
+        <a class="nav-item logout-link">
+          Logout
+        </a>
+      </div>
+    </aside>
+
+    <!-- ═══ MAIN ═══ -->
+    <div class="main-wrapper">
+
+      <!-- TOP NAV -->
+      <header class="topnav">
+        <button class="hamburger" id="hamburger">&#9776;</button>
+        <div class="topnav-right">
+          <button class="icon-btn" aria-label="Notifications">
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" width="18" height="18">
+              <path d="M18 8A6 6 0 0 0 6 8c0 7-3 9-3 9h18s-3-2-3-9" />
+              <path d="M13.73 21a2 2 0 0 1-3.46 0" />
+            </svg>
+            <span class="badge">3</span>
+          </button>
+          <div class="avatar">JS</div>
+        </div>
+      </header>
+
+      <main class="content">
+
+        <!-- VIEW: EVENTS LISTING -->
+        <div class="view active-view">
+          <div class="view-header">
+            <div>
+              <h1 class="view-title">All Events</h1>
+              <p class="view-subtitle">Browse and select events for registration.</p>
+            </div>
+            <input type="text" id="eventSearch" placeholder="🔍 Search events…" oninput="filterEvents(this.value)"
+              style="width:240px;padding:9px 14px;border:1.5px solid var(--g200);border-radius:8px;font-family:inherit;font-size:13px;outline:none;"
+              onfocus="this.style.borderColor='var(--blue)'" onblur="this.style.borderColor='var(--g200)'" />
+          </div>
+
+          <!-- Solo Events -->
+          <div class="section-heading-row">
+            <div class="section-heading-left">
+              <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" width="20" height="20">
+                <circle cx="12" cy="5" r="3" />
+                <path d="M12 8v8m-4-4l4 4 4-4" />
+              </svg>
+              <h2>Solo Events</h2>
+            </div>
+          </div>
+          <div class="solo-grid" style="margin-bottom:32px;">
+            <div class="event-card" data-name="100m Sprint" onclick="openDetails('sprint')">
+              <div class="event-img-wrap"><img id="img-sprint" src="" alt="100m Sprint" /><span
+                  class="event-type-badge">Individual Track Event</span></div>
+              <div class="event-body">
+                <div class="event-title-row">
+                  <h3>100m Sprint</h3><span class="sport-emoji-sm">🏃</span>
+                </div>
+                <div class="event-meta"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"
+                    width="12" height="12">
+                    <rect x="3" y="4" width="18" height="18" rx="2" />
+                    <line x1="16" y1="2" x2="16" y2="6" />
+                    <line x1="8" y1="2" x2="8" y2="6" />
+                    <line x1="3" y1="10" x2="21" y2="10" />
+                  </svg> Oct 24, 2026</div>
+                <div class="event-meta"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"
+                    width="12" height="12">
+                    <circle cx="12" cy="12" r="10" />
+                    <polyline points="12 6 12 12 16 14" />
+                  </svg> 09:00 AM – 11:00 AM</div>
+                <div class="event-meta"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"
+                    width="12" height="12">
+                    <path d="M21 10c0 7-9 13-9 13s-9-6-9-13a9 9 0 0 1 18 0z" />
+                    <circle cx="12" cy="10" r="3" />
+                  </svg> Main Athletics Track</div><button class="reg-btn">View Details</button>
+              </div>
+            </div>
+            <div class="event-card" data-name="Long Jump" onclick="openDetails('longjump')">
+              <div class="event-img-wrap"><img id="img-longjump" src="" alt="Long Jump" /><span
+                  class="event-type-badge">Individual Field Event</span></div>
+              <div class="event-body">
+                <div class="event-title-row">
+                  <h3>Long Jump</h3><span class="sport-emoji-sm">🦘</span>
+                </div>
+                <div class="event-meta"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"
+                    width="12" height="12">
+                    <rect x="3" y="4" width="18" height="18" rx="2" />
+                    <line x1="16" y1="2" x2="16" y2="6" />
+                    <line x1="8" y1="2" x2="8" y2="6" />
+                    <line x1="3" y1="10" x2="21" y2="10" />
+                  </svg> Oct 24, 2026</div>
+                <div class="event-meta"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"
+                    width="12" height="12">
+                    <circle cx="12" cy="12" r="10" />
+                    <polyline points="12 6 12 12 16 14" />
+                  </svg> 02:00 PM – 04:00 PM</div>
+                <div class="event-meta"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"
+                    width="12" height="12">
+                    <path d="M21 10c0 7-9 13-9 13s-9-6-9-13a9 9 0 0 1 18 0z" />
+                    <circle cx="12" cy="10" r="3" />
+                  </svg> Long Jump Pit, South Field</div><button class="reg-btn">View Details</button>
+              </div>
+            </div>
+            <div class="event-card" data-name="High Jump" onclick="openDetails('highjump')">
+              <div class="event-img-wrap"><img id="img-highjump" src="" alt="High Jump" /><span
+                  class="event-type-badge">Individual Field Event</span></div>
+              <div class="event-body">
+                <div class="event-title-row">
+                  <h3>High Jump</h3><span class="sport-emoji-sm">🤸</span>
+                </div>
+                <div class="event-meta"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"
+                    width="12" height="12">
+                    <rect x="3" y="4" width="18" height="18" rx="2" />
+                    <line x1="16" y1="2" x2="16" y2="6" />
+                    <line x1="8" y1="2" x2="8" y2="6" />
+                    <line x1="3" y1="10" x2="21" y2="10" />
+                  </svg> Oct 25, 2026</div>
+                <div class="event-meta"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"
+                    width="12" height="12">
+                    <circle cx="12" cy="12" r="10" />
+                    <polyline points="12 6 12 12 16 14" />
+                  </svg> 10:30 AM – 12:30 PM</div>
+                <div class="event-meta"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"
+                    width="12" height="12">
+                    <path d="M21 10c0 7-9 13-9 13s-9-6-9-13a9 9 0 0 1 18 0z" />
+                    <circle cx="12" cy="10" r="3" />
+                  </svg> North Field Arena</div><button class="reg-btn">View Details</button>
+              </div>
+            </div>
+            <div class="event-card" data-name="200m Race" onclick="openDetails('sprint200m')">
+              <div class="event-img-wrap"><img id="img-sprint200m" src="" alt="200m Race" /><span
+                  class="event-type-badge">Individual Track Event</span></div>
+              <div class="event-body">
+                <div class="event-title-row">
+                  <h3>200m Race</h3><span class="sport-emoji-sm">⚡</span>
+                </div>
+                <div class="event-meta"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"
+                    width="12" height="12">
+                    <rect x="3" y="4" width="18" height="18" rx="2" />
+                    <line x1="16" y1="2" x2="16" y2="6" />
+                    <line x1="8" y1="2" x2="8" y2="6" />
+                    <line x1="3" y1="10" x2="21" y2="10" />
+                  </svg> Oct 25, 2026</div>
+                <div class="event-meta"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"
+                    width="12" height="12">
+                    <circle cx="12" cy="12" r="10" />
+                    <polyline points="12 6 12 12 16 14" />
+                  </svg> 02:00 PM – 04:00 PM</div>
+                <div class="event-meta"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"
+                    width="12" height="12">
+                    <path d="M21 10c0 7-9 13-9 13s-9-6-9-13a9 9 0 0 1 18 0z" />
+                    <circle cx="12" cy="10" r="3" />
+                  </svg> Main Athletics Track</div><button class="reg-btn">View Details</button>
+              </div>
+            </div>
+            <div class="event-card" data-name="Badminton Singles" onclick="openDetails('badminton')">
+              <div class="event-img-wrap"><img id="img-badminton" src="" alt="Badminton" /><span
+                  class="event-type-badge">Individual Racket Event</span></div>
+              <div class="event-body">
+                <div class="event-title-row">
+                  <h3>Badminton Singles</h3><span class="sport-emoji-sm">🏸</span>
+                </div>
+                <div class="event-meta"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"
+                    width="12" height="12">
+                    <rect x="3" y="4" width="18" height="18" rx="2" />
+                    <line x1="16" y1="2" x2="16" y2="6" />
+                    <line x1="8" y1="2" x2="8" y2="6" />
+                    <line x1="3" y1="10" x2="21" y2="10" />
+                  </svg> Oct 27, 2026</div>
+                <div class="event-meta"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"
+                    width="12" height="12">
+                    <circle cx="12" cy="12" r="10" />
+                    <polyline points="12 6 12 12 16 14" />
+                  </svg> 09:00 AM – 05:00 PM</div>
+                <div class="event-meta"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"
+                    width="12" height="12">
+                    <path d="M21 10c0 7-9 13-9 13s-9-6-9-13a9 9 0 0 1 18 0z" />
+                    <circle cx="12" cy="10" r="3" />
+                  </svg> Indoor Badminton Courts</div><button class="reg-btn">View Details</button>
+              </div>
+            </div>
+          </div>
+
+          <!-- Team Events -->
+          <div class="section-heading-row">
+            <div class="section-heading-left">
+              <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" width="20" height="20">
+                <path d="M17 21v-2a4 4 0 0 0-4-4H5a4 4 0 0 0-4 4v2" />
+                <circle cx="9" cy="7" r="4" />
+                <path d="M23 21v-2a4 4 0 0 0-3-3.87" />
+                <path d="M16 3.13a4 4 0 0 1 0 7.75" />
+              </svg>
+              <h2>Team Events</h2>
+            </div>
+          </div>
+          <div class="team-list" style="margin-bottom:32px;">
+            <div class="team-card" data-name="Football" onclick="openDetails('football')">
+              <div class="team-img-wrap"><img id="img-football" src="" alt="Football" /></div>
+              <div class="team-body">
+                <div class="team-title-wrap">
+                  <h3>Football</h3><span class="team-size-tag">Team: 11 Players</span>
+                </div>
+                <div class="team-meta-row"><span class="team-meta-item"><svg viewBox="0 0 24 24" fill="none"
+                      stroke="currentColor" stroke-width="2" width="12" height="12">
+                      <rect x="3" y="4" width="18" height="18" rx="2" />
+                      <line x1="16" y1="2" x2="16" y2="6" />
+                      <line x1="8" y1="2" x2="8" y2="6" />
+                      <line x1="3" y1="10" x2="21" y2="10" />
+                    </svg> <span class="meta-sub">DATE</span> Oct 26, 2026</span><span class="team-meta-item"><svg
+                      viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" width="12" height="12">
+                      <circle cx="12" cy="12" r="10" />
+                      <polyline points="12 6 12 12 16 14" />
+                    </svg> <span class="meta-sub">TIME</span> 09:30 – 18:30</span><span class="team-meta-item"><svg
+                      viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" width="12" height="12">
+                      <path d="M21 10c0 7-9 13-9 13s-9-6-9-13a9 9 0 0 1 18 0z" />
+                      <circle cx="12" cy="10" r="3" />
+                    </svg> <span class="meta-sub">VENUE</span> Main Stadium Pitch</span></div>
+                <div class="team-card-footer"><span class="few-badge">Few Slots Left</span><button class="join-btn">View Details</button></div>
+              </div>
+            </div>
+            <div class="team-card" data-name="Cricket" onclick="openDetails('cricket')">
+              <div class="team-img-wrap"><img id="img-cricket" src="" alt="Cricket" /></div>
+              <div class="team-body">
+                <div class="team-title-wrap">
+                  <h3>Cricket</h3><span class="team-size-tag">Team: 11-15 Players</span>
+                </div>
+                <div class="team-meta-row"><span class="team-meta-item"><svg viewBox="0 0 24 24" fill="none"
+                      stroke="currentColor" stroke-width="2" width="12" height="12">
+                      <rect x="3" y="4" width="18" height="18" rx="2" />
+                      <line x1="16" y1="2" x2="16" y2="6" />
+                      <line x1="8" y1="2" x2="8" y2="6" />
+                      <line x1="3" y1="10" x2="21" y2="10" />
+                    </svg> <span class="meta-sub">DATE</span> Oct 27, 2026</span><span class="team-meta-item"><svg
+                      viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" width="12" height="12">
+                      <circle cx="12" cy="12" r="10" />
+                      <polyline points="12 6 12 12 16 14" />
+                    </svg> <span class="meta-sub">TIME</span> 07:00 – 19:00</span><span class="team-meta-item"><svg
+                      viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" width="12" height="12">
+                      <path d="M21 10c0 7-9 13-9 13s-9-6-9-13a9 9 0 0 1 18 0z" />
+                      <circle cx="12" cy="10" r="3" />
+                    </svg> <span class="meta-sub">VENUE</span> Cricket Ground</span></div>
+                <div class="team-card-footer"><span class="open-badge">Open Registration</span><button
+                    class="join-btn">View Details</button></div>
+              </div>
+            </div>
+            <div class="team-card" data-name="3x3 Basketball" onclick="openDetails('basketball')">
+              <div class="team-img-wrap"><img id="img-basketball" src="" alt="Basketball" /></div>
+              <div class="team-body">
+                <div class="team-title-wrap">
+                  <h3>3x3 Basketball</h3><span class="team-size-tag">Team: 3-5 Players</span>
+                </div>
+                <div class="team-meta-row"><span class="team-meta-item"><svg viewBox="0 0 24 24" fill="none"
+                      stroke="currentColor" stroke-width="2" width="12" height="12">
+                      <rect x="3" y="4" width="18" height="18" rx="2" />
+                      <line x1="16" y1="2" x2="16" y2="6" />
+                      <line x1="8" y1="2" x2="8" y2="6" />
+                      <line x1="3" y1="10" x2="21" y2="10" />
+                    </svg> <span class="meta-sub">DATE</span> Oct 26, 2026</span><span class="team-meta-item"><svg
+                      viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" width="12" height="12">
+                      <circle cx="12" cy="12" r="10" />
+                      <polyline points="12 6 12 12 16 14" />
+                    </svg> <span class="meta-sub">TIME</span> 08:00 – 17:00</span><span class="team-meta-item"><svg
+                      viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" width="12" height="12">
+                      <path d="M21 10c0 7-9 13-9 13s-9-6-9-13a9 9 0 0 1 18 0z" />
+                      <circle cx="12" cy="10" r="3" />
+                    </svg> <span class="meta-sub">VENUE</span> Indoor Sports Complex</span></div>
+                <div class="team-card-footer"><span class="open-badge">Open Registration</span><button
+                    class="join-btn">View Details</button></div>
+              </div>
+            </div>
+            <div class="team-card" data-name="Volleyball" onclick="openDetails('volleyball')">
+              <div class="team-img-wrap"><img id="img-volleyball" src="" alt="Volleyball" />
+              </div>
+              <div class="team-body">
+                <div class="team-title-wrap">
+                  <h3>Volleyball</h3><span class="team-size-tag">Team: 6-8 Players</span>
+                </div>
+                <div class="team-meta-row"><span class="team-meta-item"><svg viewBox="0 0 24 24" fill="none"
+                      stroke="currentColor" stroke-width="2" width="12" height="12">
+                      <rect x="3" y="4" width="18" height="18" rx="2" />
+                      <line x1="16" y1="2" x2="16" y2="6" />
+                      <line x1="8" y1="2" x2="8" y2="6" />
+                      <line x1="3" y1="10" x2="21" y2="10" />
+                    </svg> <span class="meta-sub">DATE</span> Oct 28, 2026</span><span class="team-meta-item"><svg
+                      viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" width="12" height="12">
+                      <circle cx="12" cy="12" r="10" />
+                      <polyline points="12 6 12 12 16 14" />
+                    </svg> <span class="meta-sub">TIME</span> 09:00 – 17:00</span><span class="team-meta-item"><svg
+                      viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" width="12" height="12">
+                      <path d="M21 10c0 7-9 13-9 13s-9-6-9-13a9 9 0 0 1 18 0z" />
+                      <circle cx="12" cy="10" r="3" />
+                    </svg> <span class="meta-sub">VENUE</span> Volleyball Courts</span></div>
+                <div class="team-card-footer"><span class="open-badge">Open Registration</span><button
+                    class="join-btn">View Details</button></div>
+              </div>
+            </div>
+          </div>
+        </div>
+
+      </main>
+      <footer class="site-footer">
+        <nav class="footer-links"><a href="#">Privacy Policy</a><a href="#">Terms of Service</a><a href="#">Contact
+            Support</a></nav>
+        <span>© 2026 Sports Day Management System</span>
+      </footer>
+    </div>
+  </div>
+
+  <!-- ═══ EVENT DETAIL MODAL ═══ -->
+  <div class="modal-backdrop" id="detailsModal" onclick="closeDetails(event)">
+    <div class="modal-container" onclick="event.stopPropagation()">
+      <img class="modal-header-img" id="modalImg" src="" alt="Event Detail" />
+      <div class="modal-body">
+        <div class="modal-title-row">
+          <h2 id="modalTitle">Event Title</h2>
+          <span class="modal-badge" id="modalType">Individual Track Event</span>
+        </div>
+        <div class="modal-meta-list">
+          <div class="modal-meta-item">
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" width="16" height="16">
+              <rect x="3" y="4" width="18" height="18" rx="2" />
+              <line x1="16" y1="2" x2="16" y2="6" /><line x1="8" y1="2" x2="8" y2="6" /><line x1="3" y1="10" x2="21" y2="10" />
+            </svg>
+            <strong>Date:</strong>&nbsp;<span id="modalDate">Oct 24, 2026</span>
+          </div>
+          <div class="modal-meta-item">
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" width="16" height="16">
+              <circle cx="12" cy="12" r="10" /><polyline points="12 6 12 12 16 14" />
+            </svg>
+            <strong>Time:</strong>&nbsp;<span id="modalTime">09:00 AM – 11:00 AM</span>
+          </div>
+          <div class="modal-meta-item">
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" width="16" height="16">
+              <path d="M21 10c0 7-9 13-9 13s-9-6-9-13a9 9 0 0 1 18 0z" /><circle cx="12" cy="10" r="3" />
+            </svg>
+            <strong>Venue:</strong>&nbsp;<span id="modalVenue">Main Athletics Track</span>
+          </div>
+        </div>
+        <div class="modal-actions" style="display:flex;gap:10px;">
+          <button class="modal-close-btn" onclick="closeDetails(null)">Close</button>
+          <button id="soloRegBtn" class="btn-primary" onclick="goToSoloRegistration()" style="padding:8px 18px;font-size:13px;color: white;display:none;">Register Now →</button>
+          <button id="teamRegBtn" class="btn-primary" onclick="goToTeamRegistration()" style="padding:8px 18px;font-size:13px;color: white;display:none;">Register Now →</button>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <script src="../src/assets/assets.js"></script>
+  <script src="api.js"></script>
+  <script>
+    // Set Images on Page Load
+    document.addEventListener("DOMContentLoaded", async () => {
+      // Session verification
+      try {
+          const session = await AuthAPI.getSession();
+          if (!session.authenticated) {
+              console.warn("Unauthorized access. Redirecting to login...");
+              window.location.href = 'dep_eve_login.html';
+              return;
+          }
+          
+          // Role-specific brand suite text
+          const brandSuite = document.querySelector('.brand-suite');
+          if (brandSuite) {
+              if (session.user.role === 'admin') {
+                  brandSuite.textContent = "Admin Control Panel";
+              } else if (session.user.role === 'event') {
+                  brandSuite.textContent = "Event Coordinator";
+              } else {
+                  brandSuite.textContent = "Department Coordinator";
+              }
+          }
+      } catch (err) {
+          console.error("Session verification failed:", err);
+          window.location.href = 'dep_eve_login.html';
+          return;
+      }
+
+      // Hook up logout link
+      const logoutLinks = document.querySelectorAll('.logout-link, a[href="dep_eve_login.html"]');
+      logoutLinks.forEach(link => {
+          link.addEventListener("click", async (e) => {
+              e.preventDefault();
+              try {
+                  await AuthAPI.logout();
+              } catch (err) {
+                  console.error("Logout request failed:", err);
+              }
+              window.location.href = 'dep_eve_login.html';
+          });
+      });
+
+      if (typeof ASSETS !== 'undefined') {
+        document.getElementById('img-sprint').src = ASSETS.sprint;
+        document.getElementById('img-longjump').src = ASSETS.longjump;
+        document.getElementById('img-highjump').src = ASSETS.highjump;
+        document.getElementById('img-sprint200m').src = ASSETS['200m'] || ASSETS['sprint200m'] || '';
+        document.getElementById('img-badminton').src = ASSETS.badminton;
+        document.getElementById('img-football').src = ASSETS.football;
+        document.getElementById('img-cricket').src = ASSETS.cricket;
+        document.getElementById('img-basketball').src = ASSETS.basketball;
+        document.getElementById('img-volleyball').src = ASSETS.volleyball;
+      }
+    });
+
+    const EVENT_DATA = {
+      sprint: { displayName:'100m Sprint Championship', subtype:'Individual Track Event', date:'Oct 24, 2026', time:'09:00 AM – 11:00 AM', venue:'Main Athletics Track' },
+      longjump: { displayName:'Long Jump Championship', subtype:'Individual Field Event', date:'Oct 24, 2026', time:'02:00 PM – 04:00 PM', venue:'Long Jump Pit, South Field' },
+      highjump: { displayName:'High Jump Championship', subtype:'Individual Field Event', date:'Oct 25, 2026', time:'10:30 AM – 12:30 PM', venue:'North Field Arena' },
+      sprint200m: { displayName:'200m Race', subtype:'Individual Track Event', date:'Oct 25, 2026', time:'02:00 PM – 04:00 PM', venue:'Main Athletics Track' },
+      badminton: { displayName:'Badminton Singles', subtype:'Individual Racket Event', date:'Oct 27, 2026', time:'09:00 AM – 05:00 PM', venue:'Indoor Badminton Courts' },
+      football: { displayName:'Football Championship', subtype:'Team Event', date:'Oct 26, 2026', time:'09:30 AM – 06:30 PM', venue:'Main Stadium Pitch' },
+      cricket: { displayName:'Cricket Tournament', subtype:'Team Event', date:'Oct 27, 2026', time:'07:00 AM – 07:00 PM', venue:'Cricket Ground' },
+      basketball: { displayName:'3×3 Basketball', subtype:'Team Event', date:'Oct 26, 2026', time:'08:00 AM – 05:00 PM', venue:'Indoor Sports Complex' },
+      volleyball: { displayName:'Volleyball Championship', subtype:'Team Event', date:'Oct 28, 2026', time:'09:00 AM – 05:00 PM', venue:'Volleyball Courts' }
+    };
+
+    function filterEvents(q) {
+      q = q.toLowerCase().trim();
+      document.querySelectorAll('.event-card, .team-card').forEach(card => {
+        const name = (card.dataset.name || '').toLowerCase();
+        card.style.display = (!q || name.includes(q)) ? '' : 'none';
+      });
+    }
+
+    let activeEventId = '';
+
+    function openDetails(id) {
+      activeEventId = id;
+      const d = EVENT_DATA[id];
+      if (!d) return;
+      document.getElementById('modalImg').src = ASSETS[id] || '';
+      document.getElementById('modalTitle').textContent = d.displayName;
+      document.getElementById('modalType').textContent = d.subtype;
+      document.getElementById('modalDate').textContent = d.date;
+      document.getElementById('modalTime').textContent = d.time;
+      document.getElementById('modalVenue').textContent = d.venue;
+      
+      // Show appropriate button based on event type
+      const isTeam = d.subtype.toLowerCase().includes('team');
+      document.getElementById('soloRegBtn').style.display = isTeam ? 'none' : 'block';
+      document.getElementById('teamRegBtn').style.display = isTeam ? 'block' : 'none';
+      
+      document.getElementById('detailsModal').classList.add('open');
+    }
+
+    function closeDetails(e) {
+      if (e) e.stopPropagation();
+      document.getElementById('detailsModal').classList.remove('open');
+    }
+
+    function goToSoloRegistration() {
+      if (activeEventId) {
+        window.location.href = 'Solo_Reg.html?event=' + encodeURIComponent(activeEventId);
+      }
+    }
+
+    function goToTeamRegistration() {
+      if (activeEventId) {
+        window.location.href = 'Team_Reg_Final.html?event=' + encodeURIComponent(activeEventId);
+      }
+    }
+
+    // Sidebar Hamburger Toggle
+    const hb=document.getElementById('hamburger'),sb=document.getElementById('sidebar');
+    if(hb&&sb){hb.addEventListener('click',()=>sb.classList.toggle('open'));document.addEventListener('click',(e)=>{if(!sb.contains(e.target)&&!hb.contains(e.target))sb.classList.remove('open');});}
+  </script>
+</body>
+
+</html>
+

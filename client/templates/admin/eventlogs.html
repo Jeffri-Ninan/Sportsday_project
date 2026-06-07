@@ -1,0 +1,117 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Event Logs</title>
+
+<link rel="stylesheet" href="eventlogstyle.css">
+
+</head>
+
+<body>
+
+<div class="container">
+
+  <div class="sidebar">
+     
+      <aside>
+        <ul class="menu">
+          <h2>Sports Day'26</h2>
+          <h4>Managing Athletics'26</h4>
+          <li><a href="dashboard.html" >Dashboard</a></li>
+          <li><a href="deptcenter.html">Department Center</a></li>
+          <li><a href="staffcontrol.html" >Staff Control</a></li>
+          <li><a href="event-control.html">Event Control</a></li>
+          <li><a href="eventlogs.html" class="active">Event Logs</a></li>
+        </ul>
+
+        <div class="bottom-menu">
+          <ul>
+            <li><a href="#">Help Center</a></li>
+            <li><a href="#">Logout</a></li>
+          </ul>
+        </div>
+
+      </aside>
+
+  </div>
+
+  <div class="main">
+
+    <h1>Event Activity Logs</h1>
+
+    <div class="logs">
+
+      <table>
+
+        <thead>
+          <tr>
+            <th>Event</th>
+            <th>Activity</th>
+            <th>Date</th>
+            <th>Time</th>
+            <th>Status</th>
+          </tr>
+        </thead>
+
+        <tbody>
+
+          <tr>
+            <td>Football Finals</td>
+            <td>Event Created</td>
+            <td>20-06-2026</td>
+            <td>09:00 AM</td>
+            <td><span class="status active">Active</span></td>
+          </tr>
+
+          <tr>
+            <td>Basketball Match</td>
+            <td>Venue Updated</td>
+            <td>21-06-2026</td>
+            <td>11:30 AM</td>
+            <td><span class="status completed">Updated</span></td>
+          </tr>
+
+          <tr>
+            <td>Marathon</td>
+            <td>Event Cancelled</td>
+            <td>22-06-2026</td>
+            <td>01:00 PM</td>
+            <td><span class="status cancelled">Cancelled</span></td>
+          </tr>
+
+        </tbody>
+
+      </table>
+
+    </div>
+
+  <script src="../api.js"></script>
+  <script>
+    document.addEventListener("DOMContentLoaded", async () => {
+        try {
+            const session = await AuthAPI.getSession();
+            if (!session.authenticated || session.user.role !== 'admin') {
+                window.location.href = '../admin_login.html';
+                return;
+            }
+        } catch (err) {
+            window.location.href = '../admin_login.html';
+            return;
+        }
+
+        // Wire up logout
+        const logoutLinks = document.querySelectorAll('a[href="#"]');
+        logoutLinks.forEach(link => {
+            if (link.textContent.trim().toLowerCase() === 'logout') {
+                link.addEventListener('click', async (e) => {
+                    e.preventDefault();
+                    await AuthAPI.logout();
+                    window.location.href = '../admin_login.html';
+                });
+            }
+        });
+    });
+  </script>
+</body>

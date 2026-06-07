@@ -1,0 +1,393 @@
+*{
+    margin:0;
+    padding:0;
+    box-sizing:border-box;
+    font-family:Inter, sans-serif;
+}
+
+:root{
+    --primary-color:#004AC6;
+    --secondary-color:#2563EB;
+    --background-color:#F7F9FB;
+    --text-color:#191C1E;
+    --card-background:#FFFFFF;
+    --border-color: #C3C6D7;
+    --menutxt-color: #434655;
+}
+
+body{
+    background-color: var(--background-color);
+}
+
+.container{
+    display:flex;
+}
+
+/* --------------------------Menu---------------------------- */
+.sidebar {
+    position: fixed;
+    top: 50;
+    width: 200px;
+}
+
+.menu{
+    background: var(--card-background);
+    display:flex;
+    width: 250px;
+    height: 80vh;
+    flex-direction: column;
+    padding:15px;
+    border-right: var(--border-color) 1px solid;
+    list-style: none;
+}
+
+.menu h2{
+    font-size:24px;
+    font-weight:600;
+    color:var(--primary-color);
+    padding:15px;
+}
+
+.menu h4{
+    color: var(--menutxt-color);
+    font-size: 16px;
+    margin-bottom: 20px;
+    margin-left: 15px;
+}
+
+.menu li{
+    margin-bottom: 5px;
+    font-size: 16px;
+    cursor: pointer;
+    transition: color 0.3s;
+}
+
+.menu a {
+    display: block;
+    width: 100%;
+    text-decoration: none;
+    color: var(--text-color);
+    padding: 10px;
+    border-radius: 10px;
+}
+
+.menu .active{
+    color: var(--card-background);
+    background: var(--secondary-color);
+}
+
+.menu a:hover{
+    color: var(--secondary-color);
+    background: var(--background-color);
+}
+
+.bottom-menu{
+    height: 20vh;
+    width: 250px;
+    background: var(--card-background);
+    display:flex;
+    flex-direction: column;
+    padding:15px;
+    border-top: var(--border-color) 1px solid;
+    border-right: var(--border-color) 1px solid;
+}
+
+.bottom-menu li{
+    margin-top: 20px;
+    margin-bottom: 15px;
+    padding-bottom: 10px;
+    font-size: 16px;
+    list-style: none;
+    cursor: pointer;
+    transition: color 0.3s;
+}
+
+.bottom-menu a {
+    text-decoration: none;
+    color: var(--text-color);
+    padding: 10px;
+    border-radius: 10px;
+    margin-top: 8px;
+}
+
+/* ----------------------------Main Content---------------------------- */
+.main-content{
+    flex:1;
+    padding:20px;
+    margin-top:40px;
+    margin-left: 250px;
+}
+
+.top-bar{
+    display:flex;
+    justify-content:space-between;
+    align-items:center;
+    /* margin-bottom:20px; */
+    gap:20px;
+}
+
+.title-group{
+    display:flex;
+    flex-direction:column;
+    gap:5px;
+    padding: 20px;
+}
+
+.top-bar h2{
+    font-size:36px;
+    color:var(--primary-color);
+    margin:0;
+}
+
+.top-bar p{
+    color:var(--text-color);
+    max-width: 1000px;
+}
+
+.cards {
+    display: grid;
+    grid-template-columns: repeat(4, 1fr);
+    gap: 20px;
+    padding: 20px;
+}
+
+.card{
+    width: 370px;
+    background: var(--card-background);
+    padding: 20px;
+    border-radius: 10px;
+    box-shadow: 2px 2px 5px var(--border-color);
+}
+
+.card h3{
+    font-size: 25px;
+    color: var(--text-color);
+    margin-bottom: 10px;
+}
+
+.card p{
+    color: var(--menutxt-color);
+    font-size: 18px;
+}
+
+/* -----------------------------------Form-------------------------- */
+
+.staff-box{
+    display:grid;
+    grid-template-columns: repeat(2, 1fr);
+    gap:20px;
+    padding:20px;
+}
+
+.new-staff {
+    gap:40px;
+    padding:20px;
+    box-shadow: 2px 2px 5px var(--border-color);
+    border-radius: 15px;
+    background: var(--card-background)
+}
+
+.new-staff h3 {
+    font-size: 20px;
+    color: var(--text-color);
+    margin-bottom: 20px;
+}
+
+.staff-reg {
+    display:grid;
+    grid-template-columns: repeat(2, 1fr);
+    gap:20px;
+}
+
+.form-grp {
+    padding: 20px;
+    display: flex;
+    flex-direction: column;
+}
+
+.form-grp label {
+    font-size: 16px;
+    color: var(--text-color);
+    margin-bottom: 10px;
+}
+
+.form-grp input {
+    font-size: 15px;
+    color: var(--menutxt-color);
+    border: 2px solid var(--border-color);
+    padding: 10px;
+    border-radius: 10px;
+}
+
+.form-grp select {
+    font-size: 15px;
+    color: var(--menutxt-color);
+    padding: 10px;
+    border-radius: 10px;
+    border: 2px solid var(--border-color);
+}
+
+select option {
+    background: var(--background-color);
+}
+
+button {
+    margin-bottom: 20px;
+}
+
+.reset-btn {
+    width: 100px;
+    padding: 10px;
+    background: var(--card-background);
+    border: 2px solid var(--secondary-color);
+    color: var(--secondary-color);
+    border-radius: 10px;
+    font-size: 14px;
+    margin-left: 250px;
+    cursor: pointer;
+}
+
+.submit-btn {
+    width: 200px;
+    padding: 10px;
+    background: var(--secondary-color);
+    border: none;
+    color: var(--card-background);
+    border-radius: 10px;
+    font-size: 14px;
+    cursor: pointer;
+}
+
+/* -----------------------------Details------------------------------ */
+.staff-details {
+    gap:40px;
+    padding:20px;
+    box-shadow: 2px 2px 5px var(--border-color);
+    border-radius: 15px;
+    background: var(--card-background);
+}
+
+.staff-details h3 {
+    font-size: 20px;
+    color: var(--text-color);
+    margin-bottom: 20px;
+}
+
+.pre-box {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}
+
+.circle-logo{
+    width: 120px;
+    height: 120px;
+    background: var(--primary-color);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    color: var(--card-background);
+    font-size: 38px;
+    font-weight: 900;
+    border-radius: 50%;
+}
+
+.staff-name {
+    display: flex;
+    justify-content: center;
+    align-items: baseline;
+    margin-top: 20px;
+}
+
+.staff-name h2{
+  font-size: 24px;
+  color:var(--text-color);
+}
+
+.staff-name p{
+  font-size: 28px;
+  font-weight: 600;
+  color: var(--secondary-color);
+  margin-left: 15px;
+}
+
+.preview-details{
+  padding: 10px;
+  display: grid;
+  grid-template-columns: repeat(2, 1fr);
+  gap: 25px;
+}
+
+.detail-card {
+    display: flex;
+    justify-content: start;
+    padding: 10px;
+
+}
+
+.detail-card p {
+    display:flex;
+    justify-content:end;
+    font-size:18px;
+    color: var(--text-color);
+}
+
+.detail-card span {
+    font: 20px;
+    color: var(--text-color);
+    margin-left: 8px;
+}
+
+.edit-btn {
+    background: var(--secondary-color);
+    color: var(--card-background);
+    border: none;
+    padding: 5px;
+    width: 100px;
+    height: 40px;
+    font-size: 16px;
+    border-radius: 10px;
+    cursor: pointer;
+}
+
+/* -------------------------------Manager detail--------------------------------- */
+.table-box{
+    background: var(--card-background);
+    width: 1580px;
+    border-radius:15px;
+    box-shadow: 2px 2px 5px var(--border-color);
+    overflow:hidden;
+    margin-top: 20px;
+    margin-left: 10px;
+    padding: 20px;
+}
+
+.table-header{
+    padding:20px;
+    display:flex;
+    justify-content:space-between;
+}
+
+.table-header input{
+    padding: 10px;
+    border: 1px solid var(--border-color);
+    border-radius: 10px;
+}
+
+table{
+    width:100%;
+    border-collapse:collapse;
+    text-align: center;
+}
+
+thead{
+    background:#f1f5f9;
+}
+
+th,td{
+    padding:18px;
+}
+
+tbody tr{
+    border-top:1px solid #ddd;
+}

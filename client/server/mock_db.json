@@ -1,0 +1,470 @@
+{
+  "users": [
+    {
+      "username": "admin",
+      "role": "admin",
+      "displayName": "System Admin",
+      "password": "$2b$12$VnHIl1Oz7qlPsF5s3yBnzegfbyEDzAU/WSMw4BLKduQ5kDA4scmMa",
+      "_id": "6a237a164c323cba0e962065"
+    },
+    {
+      "username": "cs_coord",
+      "role": "dept",
+      "displayName": "Computer Science Coordinator",
+      "department": "Computer Science",
+      "password": "$2b$12$3M4PAJ.i637Sj0oXIR7DVu9i0AuSxbVe8HXDJgLIrJ9lsGniiVDfC",
+      "_id": "6a237a164c323cba0e962066"
+    },
+    {
+      "username": "it_coord",
+      "role": "dept",
+      "displayName": "IT Coordinator",
+      "department": "IT",
+      "password": "$2b$12$kAYjlRJL9BEisP/CXANEtO.bMHefSyk6U.UxbiwjdkP8MWYjYrVt.",
+      "_id": "6a237a164c323cba0e962067"
+    },
+    {
+      "username": "bcom_coord",
+      "role": "dept",
+      "displayName": "Bcom Coordinator",
+      "department": "Bcom",
+      "password": "$2b$12$NMV7pKOLMQ0ZIhWcKPrQD.JZ.LP/ds8qZp14MKqw3eRmQi0KlBaam",
+      "_id": "6a237a164c323cba0e962068"
+    },
+    {
+      "username": "event_manager",
+      "role": "event",
+      "displayName": "Event Manager",
+      "event": "all",
+      "password": "$2b$12$q3NCARUZAlt0rA1/4.dO3uLyLBYJfgSib6Oxb56Jg0sVuRgOS48yi",
+      "_id": "6a237a164c323cba0e962069"
+    }
+  ],
+  "departments": [
+    {
+      "deptId": "25IT6UG",
+      "name": "IT",
+      "coordinator": "Dr.John Kennady",
+      "email": "kennady@it.sports.edu",
+      "phone": "98787 98766",
+      "totalStudents": 80,
+      "shift": "Shift-I",
+      "username": "it_coord",
+      "password": "it123",
+      "_id": "6a237a164c323cba0e96206a"
+    },
+    {
+      "deptId": "25BC67T",
+      "name": "Bcom",
+      "coordinator": "S. Bharath",
+      "email": "bharath@bcom.sports.edu",
+      "phone": "94448 49752",
+      "totalStudents": 120,
+      "shift": "Shift-II",
+      "username": "bcom_coord",
+      "password": "bcom123",
+      "_id": "6a237a164c323cba0e96206b"
+    },
+    {
+      "deptId": "25CS768U",
+      "name": "Computer Science",
+      "coordinator": "Dr. Antony",
+      "email": "antony@cs.sports.edu",
+      "phone": "78845 24682",
+      "totalStudents": 150,
+      "shift": "Shift-I",
+      "username": "cs_coord",
+      "password": "cs123",
+      "_id": "6a237a164c323cba0e96206c"
+    }
+  ],
+  "events": [
+    {
+      "id": "sprint",
+      "displayName": "100m Sprint Championship",
+      "type": "solo",
+      "image": "100m_Sprint.jpg.jpeg",
+      "description": "Showcase your raw speed in the classic track event.",
+      "date": "2026-10-10",
+      "time": "09:00 AM",
+      "venue": "Main Athletic Track",
+      "_id": "6a237a164c323cba0e96206d"
+    },
+    {
+      "id": "sprint200m",
+      "displayName": "200m Sprint",
+      "type": "solo",
+      "image": "200m_Sprint.jpg.jpeg",
+      "description": "Test your endurance and speed in the half-lap dash.",
+      "date": "2026-10-10",
+      "time": "11:00 AM",
+      "venue": "Main Athletic Track",
+      "_id": "6a237a164c323cba0e96206e"
+    },
+    {
+      "id": "highjump",
+      "displayName": "High Jump",
+      "type": "solo",
+      "image": "High_Jump.jpg.jpeg",
+      "description": "Leap over the bar and set new heights.",
+      "date": "2026-10-11",
+      "time": "09:30 AM",
+      "venue": "Jumping Pit A",
+      "_id": "6a237a164c323cba0e96206f"
+    },
+    {
+      "id": "longjump",
+      "displayName": "Long Jump",
+      "type": "solo",
+      "image": "Long_Jump.jpg.jpeg",
+      "description": "Sprint down the runway and leap into the sand pit.",
+      "date": "2026-10-11",
+      "time": "02:00 PM",
+      "venue": "Jumping Pit B",
+      "_id": "6a237a164c323cba0e962070"
+    },
+    {
+      "id": "badminton",
+      "displayName": "Badminton Singles",
+      "type": "solo",
+      "image": "Badminton_Singles.jpg.jpeg",
+      "description": "Fast-paced racket action on the indoor courts.",
+      "date": "2026-10-12",
+      "time": "10:00 AM",
+      "venue": "Indoor Sports Complex",
+      "_id": "6a237a164c323cba0e962071"
+    },
+    {
+      "id": "basketball",
+      "displayName": "Basketball",
+      "type": "team",
+      "image": "BasketBall.jpg.jpeg",
+      "description": "5v5 tournament on the concrete courts.",
+      "date": "2026-10-13",
+      "time": "08:30 AM",
+      "venue": "Outdoor Basketball Court",
+      "_id": "6a237a164c323cba0e962072"
+    },
+    {
+      "id": "football",
+      "displayName": "Football",
+      "type": "team",
+      "image": "Football.jpg.jpeg",
+      "description": "11v11 knockout cup on the grass turf.",
+      "date": "2026-10-14",
+      "time": "08:00 AM",
+      "venue": "Main Football Ground",
+      "_id": "6a237a164c323cba0e962073"
+    },
+    {
+      "id": "cricket",
+      "displayName": "Cricket",
+      "type": "team",
+      "image": "Cricket.jpg.jpeg",
+      "description": "T10 format tournament with tennis ball.",
+      "date": "2026-10-15",
+      "time": "07:30 AM",
+      "venue": "College Cricket Ground",
+      "_id": "6a237a164c323cba0e962074"
+    },
+    {
+      "id": "volleyball",
+      "displayName": "Volleyball",
+      "type": "team",
+      "image": "VolleyBall.jpg.jpeg",
+      "description": "6v6 clash of spikes and blocks.",
+      "date": "2026-10-12",
+      "time": "03:00 PM",
+      "venue": "Outdoor Volleyball Court",
+      "_id": "6a237a164c323cba0e962075"
+    }
+  ],
+  "results": [
+    {
+      "type": "solo",
+      "eventId": "sprint",
+      "eventName": "100m Sprint Championship",
+      "standings": [
+        {
+          "rank": 1,
+          "participantName": "Jerry",
+          "department": "IT",
+          "record": "10.80"
+        },
+        {
+          "rank": 2,
+          "participantName": "Jeffri",
+          "department": "CS",
+          "record": "11.10"
+        },
+        {
+          "rank": 3,
+          "participantName": "Siva",
+          "department": "CS",
+          "record": "11.25"
+        }
+      ],
+      "_id": "6a237a164c323cba0e962076"
+    },
+    {
+      "type": "solo",
+      "eventId": "highjump",
+      "eventName": "High Jump",
+      "standings": [
+        {
+          "rank": 1,
+          "participantName": "Vikram Singh",
+          "regno": "UG24CS45",
+          "record": "1.95m",
+          "department": "Computer Science"
+        },
+        {
+          "rank": 2,
+          "participantName": "Siddharth Roy",
+          "regno": "UG23CE04",
+          "record": "1.90m",
+          "department": "Civil Eng."
+        },
+        {
+          "rank": 3,
+          "participantName": "Arjun Das",
+          "regno": "UG25EE11",
+          "record": "1.85m",
+          "department": "Electrical Eng."
+        }
+      ],
+      "_id": "6a237a164c323cba0e962077"
+    },
+    {
+      "type": "team",
+      "eventId": "football",
+      "eventName": "Football Knockout Cup",
+      "standings": [
+        {
+          "rank": 1,
+          "teamName": "FC computer Science",
+          "department": "Computer Science",
+          "record": "Winner (3-1)"
+        },
+        {
+          "rank": 2,
+          "teamName": "Mechanical Warriors",
+          "department": "Mechanical Eng.",
+          "record": "Runner-Up"
+        },
+        {
+          "rank": 3,
+          "teamName": "ECE strikers",
+          "department": "Electronics & Comm.",
+          "record": "Third Place"
+        }
+      ],
+      "_id": "6a237a164c323cba0e962078"
+    },
+    {
+      "type": "team",
+      "eventId": "basketball",
+      "eventName": "Basketball Cup",
+      "standings": [
+        {
+          "rank": 1,
+          "teamName": "CS Ballers",
+          "department": "Computer Science",
+          "record": "Winner (62-58)"
+        },
+        {
+          "rank": 2,
+          "teamName": "EEE Thunder",
+          "department": "Electrical Eng.",
+          "record": "Runner-Up"
+        },
+        {
+          "rank": 3,
+          "teamName": "Civil Giants",
+          "department": "Civil Eng.",
+          "record": "Third Place"
+        }
+      ],
+      "_id": "6a237a164c323cba0e962079"
+    }
+  ],
+  "scores": [
+    {
+      "eventId": "sprint",
+      "eventName": "100m Sprint Championship",
+      "competitor": "Jeffri Anton",
+      "score": "10.75 seconds",
+      "time": "2026-06-06 01:49:51",
+      "_id": "6a237a224c323cba0e96207a"
+    }
+  ],
+  "registrations": [
+    {
+      "type": "solo",
+      "event": "sprint",
+      "department": "Computer Science",
+      "players": [
+        {
+          "name": "Jeffri",
+          "regno": "CS2026001",
+          "email": "jeffri@cs.sports.edu",
+          "phone": "9999988888",
+          "year": "III Year",
+          "gender": "Male",
+          "isLeader": true
+        }
+      ],
+      "medicalNotes": "None",
+      "extra": {},
+      "time": "2026-06-06 01:39:07",
+      "_id": "6a237a3b4c323cba0e96207b"
+    },
+    {
+      "type": "solo",
+      "event": "highjump",
+      "department": "IT",
+      "players": [
+        {
+          "name": "Jery Mervin J",
+          "regno": "23PCA744",
+          "email": "jkamour777@gmail.com",
+          "phone": "9486683188",
+          "year": "UG 3rd Year",
+          "gender": "Male",
+          "isLeader": true
+        }
+      ],
+      "medicalNotes": "None",
+      "extra": {
+        "dob": "2006-03-30",
+        "emergencyName": "Jeffri",
+        "emergencyRel": "Brother",
+        "emergencyPhone": "9487247188",
+        "personalBest": "",
+        "heatPreference": "Morning"
+      },
+      "time": "2026-06-06 01:54:17",
+      "_id": "6a237dc982ea00e753e2320a"
+    },
+    {
+      "type": "solo",
+      "event": "sprint",
+      "department": "General",
+      "players": [
+        {
+          "name": "Siva",
+          "regno": "25PCA150",
+          "email": "ssiva@gmail.com",
+          "phone": "7894561230",
+          "year": "PG 1st Year",
+          "gender": "Male",
+          "isLeader": true
+        }
+      ],
+      "medicalNotes": "None",
+      "extra": {
+        "dob": "2005-06-11",
+        "emergencyName": "VARA",
+        "emergencyRel": "Parent",
+        "emergencyPhone": "7894561230",
+        "personalBest": "11.00",
+        "heatPreference": "Morning"
+      },
+      "time": "2026-06-07 10:36:58",
+      "_id": "6a2549ca7ec69659636ad7b2"
+    },
+    {
+      "type": "team",
+      "event": "football",
+      "department": "Computer Science",
+      "teamName": "CS_Rockers",
+      "players": [
+        {
+          "name": "Siva",
+          "regno": "25pca150",
+          "email": "ssiva@gmail.com",
+          "year": "PG 2nd Year",
+          "gender": "Male",
+          "phone": "7894561230",
+          "isLeader": true
+        },
+        {
+          "name": "jeffri",
+          "regno": "25pca134",
+          "email": "25pca134@dep.sports.edu",
+          "year": "PG 2nd Year",
+          "gender": "Male",
+          "phone": "7894561230",
+          "isLeader": false
+        },
+        {
+          "name": "Anandh",
+          "regno": "25pca154",
+          "email": "25pca154@dep.sports.edu",
+          "year": "PG 2nd Year",
+          "gender": "Male",
+          "phone": "7894561230",
+          "isLeader": false
+        },
+        {
+          "name": "mathi",
+          "regno": "25pca149",
+          "email": "25pca149@dep.sports.edu",
+          "year": "PG 2nd Year",
+          "gender": "Male",
+          "phone": "7894561230",
+          "isLeader": false
+        },
+        {
+          "name": "amar",
+          "regno": "25pca148",
+          "email": "25pca148@dep.sports.edu",
+          "year": "PG 2nd Year",
+          "gender": "Male",
+          "phone": "7894561230",
+          "isLeader": false
+        },
+        {
+          "name": "Denis",
+          "regno": "25pca141",
+          "email": "25pca141@dep.sports.edu",
+          "year": "PG 2nd Year",
+          "gender": "Male",
+          "phone": "7894561230",
+          "isLeader": false
+        }
+      ],
+      "medicalNotes": "None",
+      "extra": {},
+      "time": "2026-06-07 11:41:12",
+      "_id": "6a2558d8def80630ef704065"
+    },
+    {
+      "type": "solo",
+      "event": "sprint200m",
+      "department": "Computer Science",
+      "players": [
+        {
+          "name": "siva",
+          "regno": "25pca150",
+          "email": "ssiva@gmail.com",
+          "phone": "7894561230",
+          "year": "PG 2nd Year",
+          "gender": "Male",
+          "isLeader": true
+        }
+      ],
+      "medicalNotes": "None",
+      "extra": {
+        "dob": "2005-06-11",
+        "emergencyName": "vara",
+        "emergencyRel": "parent",
+        "emergencyPhone": "7894561230",
+        "personalBest": "20",
+        "heatPreference": "Morning"
+      },
+      "time": "2026-06-07 11:45:01",
+      "_id": "6a2559bddef80630ef704066"
+    }
+  ]
+}

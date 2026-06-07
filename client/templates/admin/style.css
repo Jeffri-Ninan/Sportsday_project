@@ -1,0 +1,389 @@
+*{
+    margin:0;
+    padding:0;
+    box-sizing:border-box;
+    font-family:Inter, sans-serif;
+}
+
+:root{
+    --primary-color:#004AC6;
+    --secondary-color:#2563EB;
+    --background-color:#F7F9FB;
+    --text-color:#191C1E;
+    --card-background:#FFFFFF;
+    --border-color: #C3C6D7;
+    --menutxt-color: #434655;
+}
+
+body{
+    background-color: var(--background-color);
+}
+
+.container{
+    display:flex;
+}
+
+/* --------------------------Menu---------------------------- */
+.sidebar {
+    position: fixed;
+    top: 50;
+    width: 200px;
+}
+
+.menu{
+    background: var(--card-background);
+    display:flex;
+    width: 250px;
+    height: 80vh;
+    flex-direction: column;
+    padding:15px;
+    border-right: var(--border-color) 1px solid;
+    list-style: none;
+}
+
+.menu h2{
+    font-size:24px;
+    font-weight:600;
+    color:var(--primary-color);
+    padding:15px;
+}
+
+.menu h4{
+    color: var(--menutxt-color);
+    font-size: 16px;
+    margin-bottom: 20px;
+    margin-left: 15px;
+}
+
+.menu li{
+    margin-bottom: 5px;
+    font-size: 16px;
+    cursor: pointer;
+    transition: color 0.3s;
+}
+
+.menu a {
+    display: block;
+    width: 100%;
+    text-decoration: none;
+    color: var(--text-color);
+    padding: 10px;
+    border-radius: 10px;
+}
+
+.menu .active{
+    color: var(--card-background);
+    background: var(--secondary-color);
+}
+
+.menu a:hover{
+    color: var(--secondary-color);
+    background: var(--background-color);
+}
+
+.bottom-menu{
+    height: 20vh;
+    width: 250px;
+    background: var(--card-background);
+    display:flex;
+    flex-direction: column;
+    padding:15px;
+    border-top: var(--border-color) 1px solid;
+    border-right: var(--border-color) 1px solid;
+}
+
+.bottom-menu li{
+    margin-top: 20px;
+    margin-bottom: 15px;
+    padding-bottom: 10px;
+    font-size: 16px;
+    list-style: none;
+    cursor: pointer;
+    transition: color 0.3s;
+}
+
+.bottom-menu a {
+    text-decoration: none;
+    color: var(--text-color);
+    padding: 10px;
+    border-radius: 10px;
+    margin-top: 8px;
+}
+
+/* ----------------------------Main Content---------------------------- */
+.main-content{
+    flex:1;
+    padding:20px;
+    margin-top:40px;
+    margin-left: 250px;
+}
+
+.top-bar{
+    display:flex;
+    justify-content:space-between;
+    align-items:center;
+    /* margin-bottom:20px; */
+    gap: 20px;
+}
+
+.title-group{
+    display:flex;
+    flex-direction:column;
+    gap:5px;
+    padding: 20px;
+}
+
+.top-bar h2{
+    font-size:36px;
+    color:var(--primary-color);
+    margin:0;
+}
+
+.top-bar p{
+    color:var(--text-color);
+    max-width: 900px;
+}
+
+.quickbtn{
+    display:flex;
+    /* gap:25px; */
+}
+
+.quickbtn .btn{
+    width: 170px;
+    background:var(--secondary-color);
+    color:var(--card-background);
+    text-align: center;
+    text-decoration: none;
+    border:none;
+    padding:12px 18px;
+    border-radius:10px;
+    margin-right: 40px;
+    cursor:pointer;
+    font-weight:600;
+}
+
+.cards {
+    display: grid;
+    grid-template-columns: repeat(4, 1fr);
+    gap: 20px;
+    padding: 20px;
+}
+
+.card{
+    width: 370px;
+    background: var(--card-background);
+    padding: 20px;
+    border-radius: 10px;
+    box-shadow: 2px 2px 5px var(--border-color);
+}
+
+.card h3{
+    font-size: 25px;
+    color: var(--text-color);
+    margin-bottom: 10px;
+}
+
+.card p{
+    color: var(--menutxt-color);
+    font-size: 18px;
+}
+
+/* -----------------------------PieCharts---------------------------- */
+.chart-container{
+    display:grid;
+    grid-template-columns: repeat(2, 1fr);
+    width: 1600px;
+    gap:20px;
+    padding:20px;
+}
+
+.chart h3{
+    font-size:18px;
+    color:var(--text-color);
+    margin-bottom:10px;
+    display: flex;
+    justify-content: center
+}
+
+.chart{
+    gap:40px;
+    padding:20px;
+    box-shadow: 2px 2px 5px var(--border-color);
+    border-radius: 15px;
+    display: flex;
+    justify-content: space-between;
+    align-items: flex-start;
+}
+
+.circle-chart{
+    width:210px;
+    height:210px;
+    border-radius:50%;
+    background:conic-gradient(
+        #2563eb 0% 60%,
+        #3b82f6 60% 85%,
+        #93c5fd 85% 100%
+    );
+    margin:0;
+    margin-top: 60px;
+    margin-right: 95px;
+    display:flex;
+    justify-content:center;
+    align-items:center;
+}
+
+.inner-circle{
+    width: 140px;
+    height:140px;
+    background:var(--card-background);
+    border-radius:50%;
+    display:flex;
+    justify-content:center;
+    align-items:center;
+    flex-direction:column;
+}
+
+.status-list{
+    margin-top:120px;
+    margin-right: 40px;
+    display: flex;
+    flex-direction: column;
+    margin-bottom: 0;
+}
+
+.status{
+    font-size:14px;
+    color:var(--menutxt-color);
+    display:flex;
+    justify-content:space-between;
+    align-items: center;
+    text-align: center;
+    margin-bottom:15px;
+}
+
+.dot{
+    width:12px;
+    height:12px;
+    border-radius:50%;
+    display:inline-block;
+    margin-right:10px;
+}
+
+.dark{
+    background:#1d4ed8;
+}
+
+.medium{
+    background:#2563eb;
+}
+
+.light{
+    background:#60a5fa;
+}
+
+.state {
+    font-size: 14px;
+    margin-right: 5px;
+    display: flex;
+    align-items: flex-start;
+}
+/* ---------------------------Points Bar-------------------------------- */
+
+.chart-bar {
+    display:flex;
+    flex-direction: column;
+    align-items: center;
+    gap:20px;
+    padding:20px;
+    box-shadow: 2px 2px 5px var(--border-color);
+    border-radius: 15px;
+}
+
+.chart-bar h3 {
+    font-size:18px;
+    color:var(--text-color);
+    margin-bottom:10px;
+    display: flex;
+}
+
+.score-box{
+    margin-top:5px;
+}
+
+.score-title{
+    display:flex;
+    justify-content:space-between;
+    align-items: center;
+    margin-bottom:10px;
+}
+
+.progress-bar{
+    display: flex;
+    align-items: center;
+    width:100%;
+    width: 650px;
+    height:10px;
+    background:var(--border-color);
+    border-radius:10px;
+}
+
+.progress{
+    width: 50%;
+    height:100%;
+    background:var(--secondary-color);
+    border-radius:10px;
+}
+
+/* -----------------------Table-------------------------- */
+
+.table-box{
+    background: var(--card-background);
+    width: 1580px;
+    border-radius:15px;
+    box-shadow: 2px 2px 5px var(--border-color);
+    overflow:hidden;
+    margin-top: 20px;
+    margin-left: 10px;
+    padding: 20px;
+}
+
+.table-header{
+    padding:20px;
+    display:flex;
+    justify-content:space-between;
+}
+
+.table-header a{
+    text-decoration:none;
+    color:var(--secondary-color);
+    font-weight:bold;
+}
+
+table{
+    width:100%;
+    border-collapse:collapse;
+    text-align: center;
+}
+
+thead{
+    background:#f1f5f9;
+}
+
+th,td{
+    padding:18px;
+}
+
+tbody tr{
+    border-top:1px solid #ddd;
+}
+
+.pending{
+    color:orange;
+    font-weight:bold;
+}
+
+.completed{
+    color:green;
+    font-weight:bold;
+}

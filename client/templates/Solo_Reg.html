@@ -1,0 +1,467 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>Sports Day Registration</title>
+
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+  <link rel="stylesheet"
+    href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.2/css/all.min.css"/>
+  <link rel="stylesheet" href="new_reg.css">
+  <link rel="stylesheet" href="solo.css">
+
+</head>
+
+<body>
+
+<div class="app-shell">
+
+  <!-- ═══ SIDEBAR ═══ -->
+  <aside class="sidebar" id="sidebar">
+    <div class="sidebar-brand">
+      <div class="brand-name">Sports Day <span>'26</span></div>
+      <div class="brand-suite">Department Central</div>
+    </div>
+    <nav class="sidebar-nav">
+      <a class="nav-item" href="index.html">
+        <i class="fa-solid fa-table-columns"></i>
+        Dashboard
+      </a>
+      <a class="nav-item active" href="new_registration.html">
+        <i class="fa-solid fa-file-circle-plus"></i>
+        New Registration
+      </a>
+      <a class="nav-item" href="participants.html">
+        <i class="fa-solid fa-users"></i>
+        Participants
+      </a>
+      <a class="nav-item" href="result.html">
+        <i class="fa-solid fa-trophy"></i>
+        Results
+      </a>
+      <a class="nav-item" href="profile.html">
+        <i class="fa-solid fa-gear"></i>
+        Profile
+      </a>
+    </nav>
+    <div class="sidebar-footer">
+      <a class="nav-item">Help Center</a>
+      <a href="dep_eve_login.html" class="nav-item logout-link">Logout</a>
+    </div>
+  </aside>
+
+  <!-- ═══ MAIN ═══ -->
+  <div class="main-wrapper">
+
+    <!-- TOP NAV -->
+    <header class="topnav">
+      <button class="hamburger" id="hamburger">&#9776;</button>
+      <div class="topnav-right">
+        <button class="icon-btn" aria-label="Notifications">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" width="18" height="18">
+            <path d="M18 8A6 6 0 0 0 6 8c0 7-3 9-3 9h18s-3-2-3-9" />
+            <path d="M13.73 21a2 2 0 0 1-3.46 0" />
+          </svg>
+          <span class="badge">3</span>
+        </button>
+        <div class="avatar">JS</div>
+      </div>
+    </header>
+
+    <main class="content">
+
+    <div class="breadcrumb">
+      Events › Solo Events › 100m Sprint › Register
+    </div>
+
+    <h1 class="page-title">Register for 100m Sprint</h1>
+
+    <p class="page-subtitle">
+      Fill in the details below to register for this individual event.
+    </p>
+
+    <div class="layout">
+
+      <!-- LEFT FORM -->
+
+      <div>
+
+        <!-- PERSONAL INFO -->
+
+        <div class="card">
+
+          <h2 class="section-title">Personal Information</h2>
+
+          <div class="form-grid">
+
+            <div class="form-group">
+              <label>Full Name *</label>
+              <input type="text" id="studentName" placeholder="Enter full name">
+            </div>
+
+            <div class="form-group">
+              <label>Register Number *</label>
+              <input type="text" id="regno" placeholder="Enter register number">
+            </div>
+
+            <div class="form-group">
+              <label>Department</label>
+              <input type="text" id="deptDisplay" placeholder="Loading department..." readonly
+                style="background:#f1f5f9; color:#475569; cursor:not-allowed; font-weight:600;">
+            </div>
+
+            <div class="form-group">
+              <label>Year / Category *</label>
+              <select id="year">
+                <option>UG 1st Year</option>
+                <option>UG 2nd Year</option>
+                <option>UG 3rd Year</option>
+                <option>PG 1st Year</option>
+                <option>PG 2nd Year</option>
+              </select>
+            </div>
+
+            <div class="form-group">
+              <label>Date of Birth *</label>
+              <input type="date" id="dob">
+            </div>
+
+            <div class="form-group">
+              <label>Email Address *</label>
+              <input type="email" id="email" placeholder="Enter email address">
+            </div>
+
+            <div class="form-group">
+              <label>Gender *</label>
+              <select id="gender">
+                <option>Male</option>
+                <option>Female</option>
+                <option>Others</option>
+              </select>
+            </div>
+
+            <div class="form-group">
+              <label>Phone Number *</label>
+              <input type="text" id="phone" placeholder="Enter phone number">
+            </div>
+
+          </div>
+
+        </div>
+
+        <!-- EMERGENCY -->
+
+        <div class="card">
+
+          <h2 class="section-title">Emergency Contact</h2>
+
+          <div class="form-grid">
+
+            <div class="form-group">
+              <label>Contact Name *</label>
+              <input type="text" id="emergencyName" placeholder="Enter contact name">
+            </div>
+
+            <div class="form-group">
+              <label>Relationship *</label>
+              <input type="text" id="emergencyRel" placeholder="Parent, Guardian, Friend">
+            </div>
+
+            <div class="form-group">
+              <label>Contact Number *</label>
+              <input type="text" id="emergencyPhone" placeholder="Enter contact number">
+            </div>
+
+          </div>
+
+        </div>
+
+        <!-- EVENT INFO -->
+
+        <div class="card">
+
+          <h2 class="section-title">Event Specific Information</h2>
+
+          <div class="form-grid">
+
+            <div class="form-group">
+              <label>Personal Best</label>
+              <input type="text" id="personalBest" placeholder="e.g. 11.20 seconds">
+            </div>
+
+            <div class="form-group">
+              <label>Heat Preference</label>
+              <select id="heatPreference">
+                <option>Morning</option>
+                <option>Afternoon</option>
+              </select>
+            </div>
+
+            <div class="form-group full">
+              <label>Additional Notes</label>
+              <textarea id="notes" placeholder="Any medical conditions or additional information..."></textarea>
+            </div>
+
+          </div>
+
+        </div>
+
+        <!-- TERMS -->
+
+        <div class="card">
+
+          <div class="terms">
+            <input type="checkbox" id="termsCheck">
+
+            <p>
+              I hereby confirm that I am physically fit to participate in this event.
+              I agree to abide by the rules and regulations of Sports Day '26.
+            </p>
+          </div>
+
+        </div>
+
+        <!-- BUTTONS -->
+
+        <div class="buttons">
+
+          <button class="btn btn-cancel" onclick="window.location.href='new_registration.html'">
+            Cancel
+          </button>
+
+          <button class="btn btn-next" id="submitBtn">
+            Submit Registration
+          </button>
+
+        </div>
+
+      </div>
+
+      <!-- RIGHT PANEL -->
+
+      <div>
+
+        <div class="event-card">
+
+          <img
+            class="event-image"
+            id="eventImage"
+            src="../src/assets/images/LOGO.png"
+            alt="Event Image"
+          >
+
+          <div class="event-content">
+
+            <h2 class="event-title" id="eventTitle">Event Title</h2>
+
+            <p class="event-info" id="eventSubtype">Individual Event</p>
+
+            <p class="event-info" id="eventDate">📅 Date</p>
+
+            <p class="event-info" id="eventTime">⏰ Time</p>
+
+            <p class="event-info" id="eventVenue">📍 Venue</p>
+
+          </div>
+
+        </div>
+
+        <div class="info-box">
+
+          <h3>Registration Tips</h3>
+
+          <ul>
+            <li>Ensure all required fields are filled correctly.</li>
+            <li>You can only register for events within your department.</li>
+            <li>Contact support if you face any issues during registration.</li>
+          </ul>
+
+        </div>
+
+        <div class="info-box">
+
+          <h3>Event Rules</h3>
+
+          <ul>
+            <li>Follow official timings and instructions.</li>
+            <li>Wear proper sports attire.</li>
+            <li>Bring your ID card on event day.</li>
+            <li>Respect participants and officials.</li>
+          </ul>
+
+        </div>
+
+      </div>
+
+    </div>
+
+    <footer>
+
+      <div>
+        Privacy Policy &nbsp;&nbsp;
+        Terms of Service &nbsp;&nbsp;
+        Contact Support
+      </div>
+
+      <div>
+        © 2026 Sports Day Management System
+      </div>
+
+    </footer>
+
+    </main>
+
+    <footer class="site-footer">
+      <nav class="footer-links"><a href="#">Privacy Policy</a><a href="#">Terms of Service</a><a href="#">Contact Support</a></nav>
+      <span>© 2026 Sports Day Management System</span>
+    </footer>
+  </div>
+</div>
+
+<script src="../src/assets/assets.js"></script>
+<script src="api.js"></script>
+<script>
+  const EVENT_DATA = {
+    sprint: { displayName:'100m Sprint Championship', subtype:'Individual Track Event', date:'Oct 24, 2026', time:'09:00 AM – 11:00 AM', venue:'Main Athletics Track', image: 'sprint' },
+    longjump: { displayName:'Long Jump Championship', subtype:'Individual Field Event', date:'Oct 24, 2026', time:'02:00 PM – 04:00 PM', venue:'Long Jump Pit, South Field', image: 'longjump' },
+    highjump: { displayName:'High Jump Championship', subtype:'Individual Field Event', date:'Oct 25, 2026', time:'10:30 AM – 12:30 PM', venue:'North Field Arena', image: 'highjump' },
+    sprint200m: { displayName:'200m Race', subtype:'Individual Track Event', date:'Oct 25, 2026', time:'02:00 PM – 04:00 PM', venue:'Main Athletics Track', image: 'sprint200m' },
+    badminton: { displayName:'Badminton Singles', subtype:'Individual Racket Event', date:'Oct 27, 2026', time:'09:00 AM – 05:00 PM', venue:'Indoor Badminton Courts', image: 'badminton' }
+  };
+
+  let activeEventId = '';
+
+  document.addEventListener("DOMContentLoaded", async () => {
+    // 1. Session verification — get department from session
+    let sessionDept = '';
+    try {
+        const session = await AuthAPI.getSession();
+        if (!session.authenticated) {
+            window.location.href = 'dep_eve_login.html';
+            return;
+        }
+        sessionDept = session.user.department || '';
+        const deptField = document.getElementById('deptDisplay');
+        if (deptField) {
+            deptField.value = sessionDept || 'Not Assigned';
+        }
+    } catch (err) {
+        window.location.href = 'dep_eve_login.html';
+        return;
+    }
+
+    // Hook up logout
+    const logoutLinks = document.querySelectorAll('a[href="#"]');
+    logoutLinks.forEach(link => {
+        if (link.textContent.trim().toLowerCase() === 'logout') {
+            link.addEventListener("click", async (e) => {
+                e.preventDefault();
+                await AuthAPI.logout();
+                window.location.href = 'dep_eve_login.html';
+            });
+        }
+    });
+
+    // 2. Parse Event query param
+    const params = new URLSearchParams(window.location.search);
+    activeEventId = params.get('event') || 'sprint';
+    const eventDetails = EVENT_DATA[activeEventId];
+
+    if (eventDetails) {
+        document.getElementById('eventTitle').textContent = eventDetails.displayName;
+        document.getElementById('eventSubtype').textContent = eventDetails.subtype;
+        document.getElementById('eventDate').textContent = '📅 ' + eventDetails.date;
+        document.getElementById('eventTime').textContent = '⏰ ' + eventDetails.time;
+        document.getElementById('eventVenue').textContent = '📍 ' + eventDetails.venue;
+        
+        // Try rendering image from ASSETS
+        if (typeof ASSETS !== 'undefined' && ASSETS[activeEventId]) {
+            document.getElementById('eventImage').src = ASSETS[activeEventId];
+        }
+        
+        // Update breadcrumb and page title
+        document.querySelector('.breadcrumb').textContent = `Events › Solo Events › ${eventDetails.displayName} › Register`;
+        document.querySelector('.page-title').textContent = `Register for ${eventDetails.displayName}`;
+    }
+
+    // 3. Form Submission logic
+    const submitBtn = document.getElementById('submitBtn');
+    submitBtn.addEventListener('click', async (e) => {
+        e.preventDefault();
+
+        // Retrieve field values
+        const name = document.getElementById('studentName').value.trim();
+        const regno = document.getElementById('regno').value.trim();
+        const year = document.getElementById('year').value;
+        const dob = document.getElementById('dob').value;
+        const email = document.getElementById('email').value.trim();
+        const gender = document.getElementById('gender').value;
+        const phone = document.getElementById('phone').value.trim();
+        const emergencyName = document.getElementById('emergencyName').value.trim();
+        const emergencyRel = document.getElementById('emergencyRel').value.trim();
+        const emergencyPhone = document.getElementById('emergencyPhone').value.trim();
+        const termsCheck = document.getElementById('termsCheck').checked;
+
+        // Simple validation
+        if (!name || !regno || !dob || !email || !phone || !emergencyName || !emergencyRel || !emergencyPhone) {
+            alert("Please fill in all required fields marked with *");
+            return;
+        }
+
+        if (!termsCheck) {
+            alert("You must agree to the physical fitness and rules agreement.");
+            return;
+        }
+
+        // Build Payload
+        const payload = {
+            event: eventDetails ? eventDetails.displayName : activeEventId,
+            eventId: activeEventId,
+            type: 'solo',
+            department: sessionDept,
+            teamName: null,
+            players: [
+                {
+                    name: name,
+                    regno: regno,
+                    email: email,
+                    year: year,
+                    gender: gender,
+                    phone: phone,
+                    isLeader: true
+                }
+            ],
+            extra: {
+                dob: dob,
+                emergencyName: emergencyName,
+                emergencyRel: emergencyRel,
+                emergencyPhone: emergencyPhone,
+                personalBest: document.getElementById('personalBest').value.trim(),
+                heatPreference: document.getElementById('heatPreference').value
+            }
+        };
+
+        try {
+            submitBtn.disabled = true;
+            submitBtn.textContent = "Submitting...";
+            
+            const result = await RegistrationsAPI.create(payload);
+            alert("Registration successful!");
+            window.location.href = 'participants.html';
+        } catch (err) {
+            console.error("Error during registration:", err);
+            alert("Registration failed: " + err.message);
+        } finally {
+            submitBtn.disabled = false;
+            submitBtn.textContent = "Submit Registration";
+        }
+    });
+  });
+
+  const hb=document.getElementById('hamburger'),sb=document.getElementById('sidebar');
+  if(hb&&sb){hb.addEventListener('click',()=>sb.classList.toggle('open'));document.addEventListener('click',(e)=>{if(!sb.contains(e.target)&&!hb.contains(e.target))sb.classList.remove('open');});}
+</script>
+</body>
+</html>

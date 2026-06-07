@@ -1,0 +1,875 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Sports Day Dashboard</title>
+
+  <!-- Google Font -->
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="style.css" />
+  <!-- Font Awesome -->
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.2/css/all.min.css" />
+
+
+</head>
+<style>
+  * {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+    font-family: 'Inter', sans-serif;
+  }
+
+  body {
+    background: #f5f7fb;
+    color: #111827;
+  }
+
+  .container {
+    display: flex;
+    min-height: 100vh;
+  }
+
+
+  .login-wrapper {
+    position: relative;
+    z-index: 1;
+    text-align: center;
+  }
+
+
+
+  /* SIDEBAR */
+
+  .sidebar {
+    width: 250px;
+    background: #ffffff;
+    border-right: 1px solid #e5e7eb;
+    padding: 25px 20px;
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+  }
+
+  .logo h2 {
+    color: #2563eb;
+    font-size: 26px;
+    font-weight: 700;
+  }
+
+  .logo p {
+    font-size: 13px;
+    color: #6b7280;
+    margin-top: 5px;
+  }
+
+  .menu {
+    margin-top: 40px;
+  }
+
+  .menu a {
+    display: flex;
+    align-items: center;
+    gap: 12px;
+    text-decoration: none;
+    color: #374151;
+    padding: 14px 16px;
+    border-radius: 12px;
+    margin-bottom: 10px;
+    transition: 0.3s;
+    font-weight: 500;
+  }
+
+  .menu a:hover {
+    background: #eff6ff;
+    color: #2563eb;
+  }
+
+  .menu .active {
+    background: #2563eb;
+    color: white;
+  }
+
+  .bottom-menu {
+    margin-top: 40px;
+  }
+
+  .bottom-menu a {
+    display: flex;
+    align-items: center;
+    gap: 12px;
+    text-decoration: none;
+    color: #374151;
+    padding: 14px 16px;
+    border-radius: 12px;
+    margin-bottom: 10px;
+  }
+
+  /* MAIN CONTENT */
+
+  .main {
+    flex: 1;
+    padding: 30px;
+  }
+
+  /* TOPBAR */
+
+  .topbar {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-bottom: 30px;
+  }
+
+  .nav-links {
+    display: flex;
+    gap: 30px;
+  }
+
+  .nav-links a {
+    text-decoration: none;
+    color: #6b7280;
+    font-weight: 500;
+  }
+
+  .nav-links .active {
+    color: #2563eb;
+    border-bottom: 2px solid #2563eb;
+    padding-bottom: 5px;
+  }
+
+  .top-icons {
+    display: flex;
+    gap: 20px;
+    font-size: 18px;
+    color: #374151;
+  }
+
+  /* HEADER */
+
+  .header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-bottom: 25px;
+    flex-wrap: wrap;
+    gap: 20px;
+  }
+
+  .header-text h1 {
+    font-size: 38px;
+    margin-bottom: 8px;
+  }
+
+  .header-text p {
+    color: #6b7280;
+  }
+
+  .countdown {
+    background: #2563eb;
+    color: white;
+    padding: 18px 30px;
+    border-radius: 16px;
+    text-align: center;
+    box-shadow: 0 10px 20px rgba(37, 99, 235, 0.2);
+  }
+
+  .countdown h3 {
+    font-size: 14px;
+    margin-bottom: 8px;
+    font-weight: 500;
+  }
+
+  .countdown .time {
+    font-size: 32px;
+    font-weight: 700;
+  }
+
+  .btn {
+    background: #2563eb;
+    color: white;
+    border: none;
+    padding: 14px 24px;
+    border-radius: 12px;
+    cursor: pointer;
+    font-weight: 600;
+    transition: 0.3s;
+  }
+
+  .btn:hover {
+    background: #1e4fd8;
+  }
+
+  /* STATS */
+
+  .stats {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+    gap: 20px;
+    margin-bottom: 35px;
+  }
+
+  .card {
+    background: white;
+    padding: 25px;
+    border-radius: 18px;
+    border: 1px solid #e5e7eb;
+    box-shadow: 0 5px 15px rgba(0, 0, 0, 0.03);
+  }
+
+  .card-top {
+    display: flex;
+    justify-content: space-between;
+    margin-bottom: 15px;
+  }
+
+  .card h2 {
+    font-size: 36px;
+  }
+
+  .card p {
+    color: #6b7280;
+    margin-top: 8px;
+  }
+
+  /* SECTION TITLE */
+
+  .section-title {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    font-size: 28px;
+    margin-bottom: 20px;
+  }
+
+  /* EVENT GRID */
+
+  .events-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+    gap: 25px;
+    margin-bottom: 40px;
+  }
+
+  .event-card {
+    background: white;
+    border-radius: 20px;
+    overflow: hidden;
+    border: 1px solid #e5e7eb;
+    transition: 0.3s;
+  }
+
+  .event-card:hover {
+    transform: translateY(-5px);
+    box-shadow: 0 12px 25px rgba(0, 0, 0, 0.08);
+  }
+
+  .event-card img {
+    width: 100%;
+    height: 220px;
+    object-fit: cover;
+  }
+
+  .event-content {
+    padding: 20px;
+  }
+
+  .event-content h3 {
+    margin-bottom: 10px;
+    font-size: 24px;
+  }
+
+  .event-content p {
+    color: #6b7280;
+    font-size: 14px;
+    margin-bottom: 15px;
+  }
+
+  .event-details {
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
+    margin-bottom: 20px;
+    color: #374151;
+    font-size: 14px;
+  }
+
+  .event-details span {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+  }
+
+  .register-btn {
+    width: 100%;
+    background: #2563eb;
+    color: white;
+    border: none;
+    padding: 14px;
+    border-radius: 10px;
+    font-weight: 600;
+    cursor: pointer;
+  }
+
+  /* TEAM EVENTS */
+
+  .team-event {
+    background: white;
+    border-radius: 18px;
+    padding: 20px;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    flex-wrap: wrap;
+    gap: 20px;
+    margin-bottom: 20px;
+    border: 1px solid #e5e7eb;
+  }
+
+  .team-left {
+    display: flex;
+    gap: 20px;
+    align-items: center;
+  }
+
+  .team-left img {
+    width: 180px;
+    height: 110px;
+    border-radius: 12px;
+    object-fit: cover;
+  }
+
+  .team-info h3 {
+    font-size: 24px;
+    margin-bottom: 6px;
+  }
+
+  .team-info p {
+    color: #6b7280;
+    font-size: 14px;
+  }
+
+  .team-meta {
+    display: flex;
+    gap: 30px;
+    flex-wrap: wrap;
+    color: #374151;
+    font-size: 14px;
+  }
+
+  .team-meta span {
+    display: flex;
+    align-items: center;
+    gap: 8px;
+  }
+
+  .join-btn {
+    background: #2563eb;
+    color: white;
+    border: none;
+    padding: 12px 24px;
+    border-radius: 10px;
+    cursor: pointer;
+    font-weight: 600;
+  }
+
+  /* RESPONSIVE */
+
+  @media(max-width:1000px) {
+
+    .sidebar {
+      display: none;
+    }
+
+    .main {
+      padding: 20px;
+    }
+
+    .header {
+      flex-direction: column;
+      align-items: flex-start;
+    }
+
+    .team-event {
+      flex-direction: column;
+      align-items: flex-start;
+    }
+
+  }
+
+  /* login css */
+
+  /* FULL PAGE OPACITY BACKGROUND IMAGE */
+
+  body {
+    background: #f5f7fb;
+    position: relative;
+    overflow-x: hidden;
+  }
+
+  /* BACKGROUND IMAGE */
+
+  body::before {
+    content: '';
+    position: fixed;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+
+    width: 1100px;
+    height: 1100px;
+
+
+  }
+</style>
+
+<body>
+
+  <div class="container">
+
+    <!-- SIDEBAR -->
+
+    <aside class="sidebar">
+
+      <div>
+
+        <div class="logo">
+
+
+          <h2>Sports Day '26</h2>
+          <p>Department Central</p>
+        </div>
+
+        <div class="menu">
+          <a href="index.html" class="active">
+            <i class="fa-solid fa-table-columns"></i>
+            Dashboard
+          </a>
+
+          <a href="new_registration.html">
+            <i class="fa-solid fa-file-circle-plus"></i>
+            New Registration
+          </a>
+
+          <a href="participants.html">
+            <i class="fa-solid fa-users"></i>
+            Participants
+          </a>
+
+          <a href="result.html">
+            <i class="fa-solid fa-trophy"></i>
+            Results
+          </a>
+
+          <a href="profile.html">
+            <i class="fa-solid fa-gear"></i>
+            Profile
+          </a>
+        </div>
+
+      </div>
+
+      <div class="bottom-menu">
+
+        <a href="#">
+          <i class="fa-regular fa-circle-question"></i>
+          Help Center
+        </a>
+
+        <a href="dep_eve_login.html">
+          <i class="fa-solid fa-right-from-bracket"></i>
+          Logout
+        </a>
+
+      </div>
+
+    </aside>
+
+    <!-- MAIN -->
+
+    <main class="main">
+
+      <!-- TOPBAR -->
+
+      <div class="topbar">
+
+        <div class="nav-links">
+          <a href="#" class="active">Dashboard</a>
+          <a href="landing.html#events">Events</a>
+          <a href="#">Schedule</a>
+        </div>
+
+        <div class="top-icons">
+          <i class="fa-regular fa-bell"></i>
+          <i class="fa-regular fa-user"></i>
+        </div>
+
+      </div>
+
+      <!-- HEADER -->
+
+      <div class="header">
+
+        <div class="header-text">
+          <h1>Department Portal</h1>
+          <p>Manage your registrations for the 2026 Sports Day Events.</p>
+        </div>
+
+        <div class="countdown">
+          <h3>Registration Deadline</h3>
+          <div class="time">08:14:22</div>
+        </div>
+
+        <button class="btn" onclick="window.location.href='new_registration.html'">
+          + New Registration
+        </button>
+
+      </div>
+
+      <!-- STATS -->
+
+      <div class="stats">
+
+        <div class="card">
+
+          <div class="card-top">
+            <i class="fa-regular fa-calendar"></i>
+          </div>
+
+          <h2 id="statEvents">...</h2>
+          <p>Registered Events</p>
+
+        </div>
+
+        <div class="card">
+
+          <div class="card-top">
+            <i class="fa-regular fa-hourglass-half"></i>
+          </div>
+
+          <h2 id="statSlots">...</h2>
+          <p>Remaining Slots</p>
+
+        </div>
+
+        <div class="card">
+
+          <div class="card-top">
+            <i class="fa-solid fa-users"></i>
+          </div>
+
+          <h2 id="statPlayers">...</h2>
+          <p>Total Players</p>
+
+        </div>
+
+      </div>
+
+      <!-- SOLO EVENTS -->
+
+      <div class="section-title">
+        <i class="fa-solid fa-user"></i>
+        <h2>Solo Events</h2>
+      </div>
+
+      <div class="events-grid">
+
+        <!-- CARD 1 -->
+
+        <div class="event-card">
+
+          <img src="../src/assets/images/100m_Sprint.jpg.jpeg" alt="100m Sprint">
+
+          <div class="event-content">
+
+            <h3>100m Sprint</h3>
+            <p>Individual Track Event</p>
+
+            <div class="event-details">
+
+              <span>
+                <i class="fa-regular fa-calendar"></i>
+                Oct 24, 2024
+              </span>
+
+              <span>
+                <i class="fa-regular fa-clock"></i>
+                09:00 AM - 11:00 AM
+              </span>
+
+              <span>
+                <i class="fa-solid fa-location-dot"></i>
+                Main Athletics Track
+              </span>
+
+            </div>
+
+            <button class="join-btn" onclick="window.location.href='new_registration.html?event=sprint'">
+              View
+            </button>
+
+          </div>
+
+        </div>
+
+        <!-- CARD 2 -->
+
+        <div class="event-card">
+
+          <img src="../src/assets/images/Long_Jump.jpg.jpeg" alt="Long Jump">
+
+          <div class="event-content">
+
+            <h3>Long Jump</h3>
+            <p>Individual Athletic Event</p>
+
+            <div class="event-details">
+
+              <span>
+                <i class="fa-regular fa-calendar"></i>
+                Oct 24, 2024
+              </span>
+
+              <span>
+                <i class="fa-regular fa-clock"></i>
+                02:00 PM - 04:00 PM
+              </span>
+
+              <span>
+                <i class="fa-solid fa-location-dot"></i>
+                Olympic Aquatic Center
+              </span>
+
+            </div>
+
+            <button class="join-btn" onclick="window.location.href='new_registration.html?event=longjump'">
+              View
+            </button>
+          </div>
+
+        </div>
+
+        <!-- CARD 3 -->
+
+        <div class="event-card">
+
+          <img src="../src/assets/images/High_Jump.jpg.jpeg" alt="High Jump">
+
+          <div class="event-content">
+
+            <h3>High Jump</h3>
+            <p>Individual Field Event</p>
+
+            <div class="event-details">
+
+              <span>
+                <i class="fa-regular fa-calendar"></i>
+                Oct 25, 2024
+              </span>
+
+              <span>
+                <i class="fa-regular fa-clock"></i>
+                10:30 AM - 12:30 PM
+              </span>
+
+              <span>
+                <i class="fa-solid fa-location-dot"></i>
+                North Field Arena
+              </span>
+
+            </div>
+
+            <button class="join-btn" onclick="window.location.href='new_registration.html?event=highjump'">
+              View
+            </button>
+
+          </div>
+
+        </div>
+
+      </div>
+
+      <!-- TEAM EVENTS -->
+
+      <div class="section-title">
+        <i class="fa-solid fa-users"></i>
+        <h2>Team Events</h2>
+      </div>
+
+      <!-- TEAM CARD -->
+
+      <div class="team-event">
+
+        <div class="team-left">
+
+          <img src="../src/assets/images/BasketBall.jpg.jpeg" alt="3x3 Basketball">
+
+          <div class="team-info">
+            <h3>3x3 Basketball</h3>
+            <p>Team: 3-5 Players</p>
+          </div>
+
+        </div>
+
+        <div class="team-meta">
+
+          <span>
+            <i class="fa-regular fa-calendar"></i>
+            Oct 26, 2024
+          </span>
+
+          <span>
+            <i class="fa-regular fa-clock"></i>
+            08:00 - 17:00
+          </span>
+
+          <span>
+            <i class="fa-solid fa-location-dot"></i>
+            Indoor Sports Complex
+          </span>
+
+        </div>
+
+        <button class="join-btn" onclick="window.location.href='new_registration.html?event=basketball'">
+          View
+        </button>
+
+      </div>
+
+      <!-- TEAM CARD -->
+
+      <div class="team-event">
+
+        <div class="team-left">
+
+          <img src="../src/assets/images/Football.jpg.jpeg" alt="6-a-side Football">
+
+          <div class="team-info">
+            <h3>Football</h3>
+            <p>Team: 6-10 Players</p>
+          </div>
+
+        </div>
+
+        <div class="team-meta">
+
+          <span>
+            <i class="fa-regular fa-calendar"></i>
+            Oct 26, 2024
+          </span>
+
+          <span>
+            <i class="fa-regular fa-clock"></i>
+            09:30 - 18:30
+          </span>
+
+          <span>
+            <i class="fa-solid fa-location-dot"></i>
+            Main Stadium Pitch
+          </span>
+
+        </div>
+
+        <button class="join-btn" onclick="window.location.href='new_registration.html?event=football'">
+          View
+        </button>
+
+      </div>
+
+    </main>
+
+  </div>
+
+  <!-- API client — connects to Flask backend at http://localhost:5000/api -->
+  <script src="api.js"></script>
+  <script>
+    // ── Countdown Timer (counts to Oct 10 2026 09:00 IST) ─────────────────────
+    (function startTimer() {
+      const deadline = new Date('2026-10-10T09:00:00+05:30').getTime();
+      const display = document.querySelector('.countdown .time');
+      if (!display) return;
+      function tick() {
+        const diff = Math.max(0, Math.floor((deadline - Date.now()) / 1000));
+        const days = Math.floor(diff / 86400);
+        const h = Math.floor((diff % 86400) / 3600);
+        const m = Math.floor((diff % 3600) / 60);
+        const s = diff % 60;
+        display.textContent = days > 0
+          ? `${days}d ${h.toString().padStart(2, '0')}h`
+          : `${h.toString().padStart(2, '0')}:${m.toString().padStart(2, '0')}:${s.toString().padStart(2, '0')}`;
+        if (diff > 0) setTimeout(tick, 1000);
+        else display.textContent = 'Deadline Passed';
+      }
+      tick();
+    })();
+
+    // ── Session Guard ──────────────────────────────────────────────────────────
+    // Verifies the user is logged in; redirects to login page if not.
+    document.addEventListener('DOMContentLoaded', async () => {
+      try {
+        const session = await AuthAPI.getSession();
+        if (!session || !session.authenticated) {
+          window.location.href = 'dep_eve_login.html';
+          return;
+        }
+        // Optional: show department name in sidebar subtitle
+        const user = session.user;
+        const sidebarSub = document.querySelector('.logo p');
+        if (sidebarSub && user) {
+          if (user.role === 'admin') sidebarSub.textContent = 'Admin Control Panel';
+          else if (user.role === 'event') sidebarSub.textContent = 'Event Coordinator';
+          else if (user.department) sidebarSub.textContent = user.department + ' Dept.';
+        }
+      } catch (err) {
+        console.error('Session check failed:', err);
+        window.location.href = 'dep_eve_login.html';
+        return;
+      }
+
+      // ── Load Live Stats from Database ──────────────────────────────────────
+      try {
+        const registrations = await RegistrationsAPI.getAll();
+
+        let totalPlayers = 0;
+        const uniqueEvents = new Set();
+
+        registrations.forEach(r => {
+          uniqueEvents.add(r.event || r.eventId);
+          if (r.players && Array.isArray(r.players)) {
+            totalPlayers += r.players.length;
+          } else if (r.name || r.studentName) {
+            totalPlayers += 1;
+          }
+        });
+
+        const statEvents = document.getElementById('statEvents');
+        const statPlayers = document.getElementById('statPlayers');
+        const statSlots = document.getElementById('statSlots');
+
+        if (statEvents) statEvents.textContent = uniqueEvents.size;
+        if (statPlayers) statPlayers.textContent = totalPlayers;
+        if (statSlots) statSlots.textContent = Math.max(0, 150 - totalPlayers); // Arbitrary total capacity limit
+      } catch (err) {
+        console.error("Failed to load dashboard stats:", err);
+        document.getElementById('statEvents').textContent = "0";
+        document.getElementById('statPlayers').textContent = "0";
+        document.getElementById('statSlots').textContent = "0";
+      }
+
+      // ── Logout handler ─────────────────────────────────────────────────────
+      document.querySelectorAll('a[href="dep_eve_login.html"]').forEach(link => {
+        link.addEventListener('click', async (e) => {
+          e.preventDefault();
+          try { await AuthAPI.logout(); } catch (_) { }
+          window.location.href = 'dep_eve_login.html';
+        });
+      });
+    });
+  </script>
+</body>
+
+</html>

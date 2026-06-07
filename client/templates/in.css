@@ -1,0 +1,215 @@
+* {
+    padding: 0; 
+    margin: 0;
+    box-sizing: border-box;
+    font-family: 'Inter', sans-serif;
+    font-size: 14px;
+}
+
+
+
+.pagecon {
+    min-height: 100vh;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    background-color: #ffffff;
+    background-image: url('LOGO.png'); 
+    background-size: 750px;
+    background-position: center;
+    background-repeat: no-repeat;
+    position: relative;
+    padding: 20px;
+}
+
+.pagecon::before {
+    content: '';
+    position: absolute;
+    inset: 0;
+    background: rgba(255, 255, 255, 0.80);
+    z-index: 0;
+}
+
+.main-content {
+    width: 100%;
+    max-width: 420px;
+    position: relative;
+    z-index: 1;
+}
+
+.header-section {
+    text-align: center; 
+    margin-bottom: 20px;
+}
+
+.user-image {
+    width: 70px;
+    height: 70px;
+    border-radius: 50%;
+    margin: 0 auto 12px auto;
+    display: block;
+}
+
+.header-section h1 {
+    font-family: 'Manrope', sans-serif;
+    font-size: 26px;
+    font-weight: 700;
+    color: #1e40af;
+    margin-bottom: 4px;
+}
+
+.header-section p {
+    font-size: 14px;
+    color: #374151;
+    font-weight: 500;
+}
+
+.form-container {
+    background: white;
+    border-radius: 20px;
+    padding: 30px 25px;
+    box-shadow: 0 4px 20px rgba(0, 0, 0, 0.1);
+}
+
+
+.admin-tab {
+    background: #dbeafe;
+    color: #1e40af;
+    text-align: center;
+    padding: 10px;
+    border-radius: 10px;
+    font-weight: 600;
+    margin-bottom: 25px;
+    font-size: 15px;
+}
+
+.form-group {
+    margin-bottom: 18px;
+}
+
+.form-group label {
+    display: block;
+    font-weight: 600;
+    color: #1f2937;
+    margin-bottom: 8px;
+    font-size: 14px;
+}
+
+
+.input-group {
+    position: relative;
+    display: flex;
+    align-items: center;
+    background: #f3f4f6; 
+    border-radius: 10px;
+    overflow: hidden;
+    height: 48px;
+}
+
+.input-group i {
+    position: absolute;
+    left: 14px;
+    color: #9ca3af;
+    font-size: 15px;
+}
+
+.input-group .toggle-password {
+    left: auto;
+    right: 14px;
+    cursor: pointer;
+}
+
+.input-group input {
+    width: 100%;
+    padding: 12px 14px 12px 45px;
+    border: none;
+    background: transparent; 
+    font-size: 14px;
+    height: 100%;
+}
+
+.input-group input:focus {
+    outline: none;
+}
+
+/* ✅ Forgot Password Center */
+.forgot-link {
+    display: block;
+    text-align: center;
+    font-size: 13px;
+    color: #6b7280;
+    text-decoration: none;
+    margin-top: 10px;
+}
+
+.forgot-link:hover {
+    color: #2563eb;
+    text-decoration: underline;
+}
+
+.login-btn {
+    width: 140px;
+    padding: 12px;
+    background: #2563eb;
+    color: white;
+    border: none;
+    border-radius: 50px; 
+    font-size: 15px;
+    font-weight: 600;
+    cursor: pointer;
+    transition: 0.3s;
+    display: block;
+    margin: 25px auto 0 auto; 
+}
+
+.login-btn:hover {
+    background: #1d4ed8;
+}
+
+.footer-links {
+    margin-top: 30px;
+    display: flex;
+    justify-content: center;
+    gap: 20px;
+}
+
+.footer-links a {
+    font-size: 12px;
+    color: #6b7280;
+    text-decoration: none;
+}
+
+.footer-links a:hover {
+    color: #2563eb;
+    text-decoration: underline;
+}
+
+/* Back Button Style */
+.back-btn {
+    position: fixed;
+    top: 20px;
+    left: 20px;
+    background: white;
+    border: 1px solid #e5e7eb;
+    padding: 10px 18px;
+    border-radius: 10px;
+    cursor: pointer;
+    font-weight: 500;
+    color: #374151;
+    display: flex;
+    align-items: center;
+    gap: 8px;
+    box-shadow: 0 2px 8px rgba(0, 0, 0, 0.08);
+    z-index: 9999;
+    transition: 0.3s;
+}
+
+.back-btn:hover {
+    background: #f9fafb;
+    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.12);
+    transform: translateY(-1px);
+}
+
+.back-btn i {
+    font-size: 14px;
+}

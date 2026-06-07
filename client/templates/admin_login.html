@@ -1,0 +1,101 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <title> Admin Login</title>
+    <link rel="stylesheet" href="in.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css">
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600&family=Manrope:wght@600;700;800&display=swap" rel="stylesheet">
+</head>
+<body>
+    <button class="back-btn" onclick="window.location.href='landing.html'">
+        <i class="fa-solid fa-arrow-left"></i> Back to home
+    </button>
+
+    <div class="pagecon">
+        <div class="main-content">
+            <div class="header-section">
+                <img class="user-image" src="../src/assets/images/LOGO.png" alt="Logo"/>
+                <h1>Sports Day' 26</h1>
+                <p>College Sports Day Registration Portal</p>
+            </div>
+
+            <div class="form-container">
+                <!-- Admin Login Tab -->
+                <div class="admin-tab">Admin Login</div>
+
+                <form id="loginForm">
+                    <div class="form-group">
+                        <label>Admin ID</label>
+                        <div class="input-group">
+                             <i class="fa-solid fa-user-tie"></i>
+                            <input type="text" id="adminId" placeholder="Enter your ID" required/>
+                        </div>
+                    </div>
+
+                    <div class="form-group">
+                        <label>Password</label>
+                        <div class="input-group">
+                            <i class="fa-solid fa-lock"></i>
+                            <input type="password" id="password" placeholder="Enter your password" required/> 
+                            <i class="fa-solid fa-eye-slash toggle-password" onclick="togglePassword()"></i>
+                        </div>
+                        <a href="#" onclick="forgotPassword()" class="forgot-link">Forgot password?</a>
+                    </div>
+
+                    <button type="submit" class="login-btn">Login</button>
+                </form>
+            </div>
+
+           
+        </div>
+    </div>
+
+    <script src="api.js"></script>
+    <script>
+        async function handleLogin(event) {
+            event.preventDefault();
+            const username = document.getElementById('adminId').value;
+            const password = document.getElementById('password').value;
+
+            try {
+                const response = await AuthAPI.login(username, password);
+                if (response.success) {
+                    const role = response.user.role;
+                    if (role === 'admin') {
+                        window.location.href = 'admin/dashboard.html';
+                    } else if (role === 'event') {
+                        window.location.href = 'Event_Manager_Dashboard.html';
+                    } else if (role === 'dept') {
+                        window.location.href = 'admin/deptcenter.html';
+                    } else {
+                        alert("Unauthorized: Admin access only.");
+                    }
+                } else {
+                    alert(response.message || "Invalid credentials");
+                }
+            } catch (err) {
+                console.error("API login failed:", err);
+                alert("Login failed: " + err.message);
+            }
+        }
+
+        // Attach event listener
+        document.getElementById('loginForm').onsubmit = handleLogin;
+
+        function togglePassword() {
+            const passwordInput = document.getElementById('password');
+            const icon = document.querySelector('.toggle-password');
+            
+            if (passwordInput.type === 'password') {
+                passwordInput.type = 'text';
+                icon.classList.remove('fa-eye-slash');
+                icon.classList.add('fa-eye');
+            } else {
+                passwordInput.type = 'password';
+                icon.classList.remove('fa-eye');
+                icon.classList.add('fa-eye-slash');
+            }
+        }
+    </script>
+</body>
+</html>

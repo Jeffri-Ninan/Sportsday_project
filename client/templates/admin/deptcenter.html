@@ -1,0 +1,341 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Admin Dashboard</title>
+
+    <link rel="stylesheet" href="deptstyle.css">
+
+</head>
+<body>
+
+  <div class="container">
+   <!-- ----------------------Sidebar---------------------------- --> 
+    <div class="sidebar">
+     
+      <aside>
+        <ul class="menu">
+          <h2>Sports Day'26</h2>
+          <h4>Managing Athletics'26</h4>
+          <li><a href="dashboard.html">Dashboard</a></li>
+          <li><a href="deptcenter.html" class="active">Department Center</a></li>
+          <li><a href="staffcontrol.html">Staff Control</a></li>
+          <li><a href="event-control.html">Event Control</a></li>
+          <li><a href="eventlogs.html">Event Logs</a></li>
+        </ul>
+
+        <div class="bottom-menu">
+          <ul>
+            <li><a href="#">Help Center</a></li>
+            <li><a href="#">Logout</a></li>
+          </ul>
+        </div>
+
+      </aside>
+
+    </div>
+
+    <!-- -----------------------Main Content---------------------------- -->
+    <div class="main-content">
+      
+      <div class="top-bar">
+        <div class="title-group">
+          <h2>Department Center</h2>
+          <p>Here you can manage all the department details includes adding, removing departments.</p>
+        </div>
+        
+      </div>
+
+      <!-- ------------------cards----------------- -->
+      <div class="cards">
+        <div class="card">
+          <h3>24</h3>
+          <p>Total Departments</p>
+        </div>
+
+        <div class="card">
+          <h3>25</h3>
+          <p>Total Events</p>
+        </div>
+
+        <div class="card">
+          <h3>450</h3>
+          <p>Total Students</p>
+        </div>
+
+        <div class="card">
+          <h3>10</h3>
+          <p>Completed Events</p>
+        </div>
+      </div>
+
+      <!-- -------------------------Department Registration------------------------ -->
+
+      <div class="dept-box">
+
+        <div class="new-dept">
+            <h3>New Department Registrations</h3>
+            <form id="addDeptForm">
+                <div class="dept-reg">
+                    
+                    <div class="form-grp">
+                        <label for="deptNameInput">Department</label>
+                        <input type="text" id="deptNameInput" placeholder="Enter your Department" required>
+                    </div>
+                    
+                    <div class="form-grp">
+                        <label for="coordinatorInput">Full Name</label>
+                        <input type="text" id="coordinatorInput" placeholder="Enter your Name" required>
+                    </div>
+                    
+                    <div class="form-grp">
+                        <label for="emailInput">Email ID</label>
+                        <input type="email" id="emailInput" placeholder="Enter your Email" required>
+                    </div>
+                    
+                    <div class="form-grp">
+                        <label for="phoneInput">Contact</label>
+                        <input type="tel" id="phoneInput" placeholder="Enter your Contact" required>
+                    </div>
+                    
+                    <div class="form-grp">
+                        <label for="totalStudentsInput">Total Students</label>
+                        <input type="number" id="totalStudentsInput" placeholder="Total Students " required>
+                    </div>
+                    
+                    <div class="form-grp">
+                        <label for="shiftInput">Shift</label>
+                        <select id="shiftInput" required>
+                            <option value="">Select Shift</option>
+                            <option value="Shift-I">Shift-I</option>
+                            <option value="Shift-II">Shift-II</option>
+                        </select>
+                    </div>
+
+                      <button type="reset" class="reset-btn">Reset</button>
+                      <button type="submit" class="submit-btn">Add Department</button>
+
+                </div>
+            </form>
+
+        </div>
+
+        <div class="dept-details">
+          <h3>New Department Details</h3>
+
+          <div class="pre-box" style="display:none;" id="previewContainer">
+
+            <div class="circle-logo" id="preCircleLogo">ED</div>
+
+            <div class="dept-name">
+
+              <h2>New Department : </h2>
+              <p id="preDeptName">Electronics</p>
+
+            </div>
+            <div class="preview-details">
+
+              <div class="detail-card">
+
+                <p><strong>Coordinator :</strong><span id="preCoordinator">Dr. Johnson</span></p>
+
+              </div>
+              <div class="detail-card">
+
+                <p><strong>Contact :</strong><span id="preContact">95432 45687</span></p>
+
+              </div>
+              <div class="detail-card">
+
+                <p><strong>Shift :</strong><span id="preShift">Shift-I</span></p>
+
+              </div>
+              <div class="detail-card">
+
+                <p><strong>Total Students :</strong><span id="preTotalStudents">70</span></p>
+
+              </div>
+              <div class="detail-card">
+
+                <p><strong>Department ID :</strong><span id="preDeptId">26SD101</span></p>
+
+              </div>
+              <div class="detail-card">
+
+                <p><strong>Password :</strong><span id="prePassword">SE23D7T</span></p>
+
+              </div>
+
+            </div>
+            <button class="edit-btn" style="display:none;">Edit</button>
+
+          </div>
+          <div class="pre-box" id="previewPlaceholder" style="display: flex; align-items: center; justify-content: center; min-height: 250px; text-align: center; color: #64748B;">
+            <p>Register a department to preview details and generated credentials.</p>
+          </div>
+
+        </div>
+
+      </div>
+
+      <!-- ----------------------------------------Department Table------------------------- -->
+      <div class="table-box">
+
+        <div class="table-header">
+
+          <h2>Existing Department</h2>
+          <input type="search" placeholder="Search.........">
+
+        </div>
+
+        <table>
+
+          <thead>
+
+            <tr>
+              <th>Department</th>
+              <th>COORDINATOR</th>
+              <th>Department ID</th>
+              <th>Contact</th>
+            </tr>
+
+          </thead>
+
+          <tbody id="deptTableBody">
+            <tr>
+              <td colspan="4" style="text-align:center; color:#64748b; padding:20px;">Loading departments...</td>
+            </tr>
+          </tbody>
+
+        </table>
+
+      </div>
+
+
+    </div>
+
+  <script src="../api.js"></script>
+  <script>
+    function esc(s) {
+        return String(s || '').replace(/&/g, '&amp;').replace(/</g, '&lt;').replace(/>/g, '&gt;');
+    }
+
+    async function loadDepartments() {
+        try {
+            const depts = await DepartmentsAPI.getAll();
+            const tbody = document.getElementById('deptTableBody');
+            if (!tbody) return;
+
+            if (!depts || !depts.length) {
+                tbody.innerHTML = `<tr><td colspan="4" style="text-align:center; color:#64748b; padding:20px;">No registered departments yet.</td></tr>`;
+                return;
+            }
+
+            tbody.innerHTML = depts.map(d => `
+                <tr>
+                    <td>${esc(d.name)}</td>
+                    <td>${esc(d.coordinator)}</td>
+                    <td>${esc(d.deptId)}</td>
+                    <td>${esc(d.phone)}</td>
+                </tr>
+            `).join('');
+        } catch (err) {
+            console.error("Failed to load departments list:", err);
+        }
+    }
+
+    document.addEventListener("DOMContentLoaded", async () => {
+        // Session check — allow admin or dept roles
+        const session = await AuthAPI.getSession();
+        if (!session.authenticated || !['admin', 'dept'].includes(session.user.role)) {
+            window.location.href = '../dep_eve_login.html';
+            return;
+        }
+
+        // Show dept user name if available
+        const titleEl = document.querySelector('.title-group h2');
+        if (titleEl && session.user.role === 'dept' && session.user.displayName) {
+            titleEl.textContent = `Welcome, ${session.user.displayName}`;
+        }
+
+        // Wire up logout
+        const logoutLinks = document.querySelectorAll('a[href="#"]');
+        logoutLinks.forEach(link => {
+            if (link.textContent.trim().toLowerCase() === 'logout') {
+                link.addEventListener('click', async (e) => {
+                    e.preventDefault();
+                    await AuthAPI.logout();
+                    window.location.href = '../dep_eve_login.html';
+                });
+            }
+        });
+
+        // Load initial departments list
+        await loadDepartments();
+
+
+        // Handle Department Registration
+        const form = document.getElementById('addDeptForm');
+        if (form) {
+            form.addEventListener('submit', async (e) => {
+                e.preventDefault();
+                const submitBtn = form.querySelector('.submit-btn');
+                submitBtn.disabled = true;
+                submitBtn.textContent = 'Registering...';
+
+                const deptData = {
+                    department: document.getElementById('deptNameInput').value.trim(),
+                    coordinatorName: document.getElementById('coordinatorInput').value.trim(),
+                    email: document.getElementById('emailInput').value.trim(),
+                    phone: document.getElementById('phoneInput').value.trim(),
+                    totalStudents: parseInt(document.getElementById('totalStudentsInput').value) || 0,
+                    shift: document.getElementById('shiftInput').value
+                };
+
+                try {
+                    const res = await DepartmentsAPI.create(deptData);
+                    if (res.success || res.username) {
+                        alert(res.message || "Department registered successfully!");
+
+                        // Update Preview Container
+                        document.getElementById('preDeptName').textContent = deptData.department;
+                        document.getElementById('preCoordinator').textContent = deptData.coordinatorName;
+                        document.getElementById('preContact').textContent = deptData.phone;
+                        document.getElementById('preShift').textContent = deptData.shift;
+                        document.getElementById('preTotalStudents').textContent = deptData.totalStudents;
+                        document.getElementById('preDeptId').textContent = res.deptId;
+                        document.getElementById('prePassword').textContent = res.password;
+
+                        // Logo circle initials
+                        const words = deptData.department.split(/\s+/);
+                        const circle = document.getElementById('preCircleLogo');
+                        if (circle) {
+                            const initial1 = words[0] ? words[0][0] : '';
+                            const initial2 = words[1] ? words[1][0] : '';
+                            circle.textContent = (initial1 + initial2).toUpperCase();
+                        }
+
+                        // Toggle Preview panels
+                        document.getElementById('previewContainer').style.display = 'block';
+                        document.getElementById('previewPlaceholder').style.display = 'none';
+
+                        // Clear inputs and refresh list
+                        form.reset();
+                        await loadDepartments();
+                    } else {
+                        alert("Failed to register department: " + (res.message || "Unknown error"));
+                    }
+                } catch (err) {
+                    console.error("Department registration error:", err);
+                    alert("An error occurred during department registration. Please check server logs.");
+                } finally {
+                    submitBtn.disabled = false;
+                    submitBtn.textContent = 'Add Department';
+                }
+            });
+        }
+    });
+  </script>
+</body>
+</html>

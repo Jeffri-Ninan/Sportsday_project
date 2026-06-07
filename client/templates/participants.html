@@ -1,0 +1,322 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width,initial-scale=1.0" />
+  <title>Sports Day '26 – Participants List</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&display=swap"
+    rel="stylesheet" />
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.2/css/all.min.css" />
+  <link rel="stylesheet" href="participants.css" />
+</head>
+
+<body>
+  <div class="app-shell">
+
+    <!-- ═══ SIDEBAR ═══ -->
+    <aside class="sidebar" id="sidebar">
+      <div class="sidebar-brand">
+        <div class="brand-name">Sports Day <span>'26</span></div>
+        <div class="brand-suite">Department Central</div>
+      </div>
+      <nav class="sidebar-nav">
+        <a class="nav-item" href="index.html">
+          <i class="fa-solid fa-table-columns"></i>
+          Dashboard
+        </a>
+        <a class="nav-item" href="new_registration.html">
+          <i class="fa-solid fa-file-circle-plus"></i>
+          New Registration
+        </a>
+        <a class="nav-item active" href="participants.html">
+          <i class="fa-solid fa-users"></i>
+          Participants
+        </a>
+        <a class="nav-item" href="result.html">
+          <i class="fa-solid fa-trophy"></i>
+          Results
+        </a>
+        <a class="nav-item" href="profile.html">
+          <i class="fa-solid fa-gear"></i>
+          Profile
+        </a>
+      </nav>
+      <div class="sidebar-footer">
+        <a class="nav-item">
+          Help Center
+        </a>
+        <a href="dep_eve_login.html" class="nav-item logout-link">
+          Logout
+        </a>
+      </div>
+    </aside>
+
+    <!-- ═══ MAIN ═══ -->
+    <div class="main-wrapper">
+
+      <!-- TOP NAV -->
+      <header class="topnav">
+        <button class="hamburger" id="hamburger">&#9776;</button>
+        <div class="topnav-right">
+          <button class="icon-btn" aria-label="Notifications">
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" width="18" height="18">
+              <path d="M18 8A6 6 0 0 0 6 8c0 7-3 9-3 9h18s-3-2-3-9" />
+              <path d="M13.73 21a2 2 0 0 1-3.46 0" />
+            </svg>
+            <span class="badge">3</span>
+          </button>
+          <div class="avatar">JS</div>
+        </div>
+      </header>
+
+      <main class="content">
+
+        <!-- VIEW: ALL REGISTRATIONS -->
+        <div class="view active-view">
+          <div class="view-header">
+            <div>
+              <h1 class="view-title">All Registrations</h1>
+              <p class="view-subtitle">Complete list of registered participants</p>
+            </div>
+            <div style="display:flex;gap:12px;align-items:center;">
+              <span class="reg-count-badge" id="regListCount">0 registrations</span>
+              <button class="btn-export" onclick="exportRegistrations()">⬇ Export CSV</button>
+            </div>
+          </div>
+          <div class="reg-list-section">
+            <div class="reg-table-wrap">
+              <table class="reg-table" id="regTable">
+                <thead>
+                  <tr>
+                    <th>#</th>
+                    <th>Name</th>
+                    <th>Reg. No.</th>
+                    <th>Email</th>
+                    <th>Year</th>
+                    <th>Gender</th>
+                    <th>Phone</th>
+                    <th>Event</th>
+                    <th>Team Name</th>
+                    <th>Time</th>
+                  </tr>
+                </thead>
+                <tbody id="regTableBody"></tbody>
+              </table>
+            </div>
+            <div id="no-regs-msg" class="no-regs-msg" style="display:none;">No registrations yet.</div>
+          </div>
+        </div>
+
+      </main>
+      <footer class="site-footer">
+        <nav class="footer-links"><a href="#">Privacy Policy</a><a href="#">Terms of Service</a><a href="#">Contact
+            Support</a></nav>
+        <span>© 2026 Sports Day Management System</span>
+      </footer>
+    </div>
+  </div>
+  <div class="toast" id="toast"></div>
+
+  <script src="api.js"></script>
+  <script>
+    let registrations = [];
+
+    async function loadRegistrations() {
+        try {
+            registrations = await RegistrationsAPI.getAll();
+        } catch (err) {
+            console.error("Failed to load registrations from API:", err);
+            registrations = [];
+        }
+        renderAllRegistrations();
+    }
+
+    function renderAllRegistrations() {
+      const tbody = document.getElementById('regTableBody'),
+        counter = document.getElementById('regListCount'),
+        noMsg = document.getElementById('no-regs-msg');
+      if (!tbody) return;
+
+      // Count players
+      let totalPlayers = 0;
+      registrations.forEach(r => {
+        if (r.players && Array.isArray(r.players)) {
+          totalPlayers += r.players.length;
+        } else if (r.name) {
+          totalPlayers += 1;
+        }
+      });
+
+      counter.textContent = totalPlayers + ' participant' + (totalPlayers !== 1 ? 's' : '');
+      if (!registrations.length) {
+        tbody.innerHTML = '';
+        if (noMsg) noMsg.style.display = 'block';
+        return;
+      }
+      if (noMsg) noMsg.style.display = 'none';
+
+      let rows = '', idx = 0;
+      registrations.forEach(r => {
+        if (r.players && Array.isArray(r.players)) {
+          r.players.forEach(p => {
+            idx++;
+            rows += `<tr>
+              <td class="reg-num">${idx}</td>
+              <td class="reg-name">${esc(p.name)}${p.isLeader ? ' <span class="leader-tag" style="background:#2563eb; color:#fff; padding:2px 6px; border-radius:4px; font-size:10px; font-weight:700;">Leader</span>' : ''}</td>
+              <td class="reg-regno">${esc(p.regno)}</td>
+              <td class="reg-email">${esc(p.email)}</td>
+              <td>${esc(p.year)}</td>
+              <td>${esc(p.gender)}</td>
+              <td>${esc(p.phone || '—')}</td>
+              <td class="events-cell">${esc(r.event)}</td>
+              <td>${esc(r.teamName || '—')}</td>
+              <td class="time-cell">${r.time || '—'}</td>
+            </tr>`;
+          });
+        } else {
+          idx++;
+          rows += `<tr>
+            <td class="reg-num">${idx}</td>
+            <td class="reg-name">${esc(r.name || r.studentName)}</td>
+            <td class="reg-regno">${esc(r.regno || r.regNumber)}</td>
+            <td class="reg-email">${esc(r.email || r.studentEmail)}</td>
+            <td>${esc(r.year || '—')}</td>
+            <td>${esc(r.gender || '—')}</td>
+            <td>${esc(r.phone || '—')}</td>
+            <td class="events-cell">${esc(r.event || r.eventId)}</td>
+            <td>${esc(r.teamName || '—')}</td>
+            <td class="time-cell">${esc(r.time || '—')}</td>
+          </tr>`;
+        }
+      });
+      tbody.innerHTML = rows;
+    }
+
+    function exportRegistrations() {
+      if (!registrations.length) {
+        showToast('No registrations to export.', '#475569');
+        return;
+      }
+      const h = ['#', 'Name', 'Reg No', 'Email', 'Year', 'Gender', 'Phone', 'Event', 'Team Name', 'Is Leader', 'Time'];
+      let idx = 0;
+      const rows = [];
+      registrations.forEach(r => {
+        if (r.players && Array.isArray(r.players)) {
+          r.players.forEach(p => {
+            idx++;
+            rows.push([
+              idx,
+              p.name,
+              p.regno,
+              p.email,
+              p.year,
+              p.gender,
+              p.phone || '',
+              r.event,
+              r.teamName || '—',
+              p.isLeader ? 'Yes' : 'No',
+              r.time || ''
+            ].map(v => '"' + String(v).replace(/"/g, '""') + '"').join(','));
+          });
+        } else {
+          idx++;
+          rows.push([
+            idx,
+            r.name || r.studentName || '',
+            r.regno || r.regNumber || '',
+            r.email || r.studentEmail || '',
+            r.year || '',
+            r.gender || '',
+            r.phone || '',
+            r.event || r.eventId || '',
+            r.teamName || '—',
+            '—',
+            r.time || ''
+          ].map(v => '"' + String(v).replace(/"/g, '""') + '"').join(','));
+        }
+      });
+      const csv = [h.join(','), ...rows].join('\n');
+      const blob = new Blob([csv], { type: 'text/csv' });
+      const url = URL.createObjectURL(blob);
+      const a = document.createElement('a');
+      a.href = url;
+      a.download = 'participants.csv';
+      a.click();
+      URL.revokeObjectURL(url);
+      showToast('CSV exported!', '#16A34A');
+    }
+
+    function esc(s) {
+      return String(s || '').replace(/&/g, '&amp;').replace(/</g, '&lt;').replace(/>/g, '&gt;');
+    }
+
+    function showToast(msg, color) {
+      const t = document.getElementById('toast');
+      if (!t) return;
+      t.textContent = msg;
+      t.style.background = color || '#1E293B';
+      t.classList.add('show');
+      setTimeout(() => t.classList.remove('show'), 3000);
+    }
+
+    // Sidebar Hamburger Toggle
+    const hb = document.getElementById('hamburger'), sb = document.getElementById('sidebar');
+    if (hb && sb) {
+      hb.addEventListener('click', () => sb.classList.toggle('open'));
+      document.addEventListener('click', (e) => {
+        if (!sb.contains(e.target) && !hb.contains(e.target)) sb.classList.remove('open');
+      });
+    }
+
+    // Auth validation and loading on page load
+    document.addEventListener("DOMContentLoaded", async () => {
+      try {
+          const session = await AuthAPI.getSession();
+          if (!session.authenticated) {
+              console.warn("Unauthorized access. Redirecting to login...");
+              window.location.href = 'dep_eve_login.html';
+              return;
+          }
+          
+          // Role-specific brand suite text
+          const brandSuite = document.querySelector('.brand-suite');
+          if (brandSuite) {
+              if (session.user.role === 'admin') {
+                  brandSuite.textContent = "Admin Control Panel";
+              } else if (session.user.role === 'event') {
+                  brandSuite.textContent = "Event Coordinator";
+              } else {
+                  brandSuite.textContent = "Department Coordinator";
+              }
+          }
+      } catch (err) {
+          console.error("Session verification failed:", err);
+          window.location.href = 'dep_eve_login.html';
+          return;
+      }
+
+      // Hook up logout link
+      const logoutLinks = document.querySelectorAll('a[href="dep_eve_login.html"]');
+      logoutLinks.forEach(link => {
+          link.addEventListener("click", async (e) => {
+              e.preventDefault();
+              try {
+                  await AuthAPI.logout();
+              } catch (err) {
+                  console.error("Logout request failed:", err);
+              }
+              window.location.href = 'dep_eve_login.html';
+          });
+      });
+
+      // Load data
+      await loadRegistrations();
+    });
+  </script>
+</body>
+
+</html>
+
