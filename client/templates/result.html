@@ -921,20 +921,40 @@
                 }
             });
 
-            // Populate Quick Winners — Gold / Silver / Bronze rows inside one card per event
-            const MEDAL = ['', '🥇', '🥈', '🥉'];
-            const MEDAL_ROW_CLASS = ['', 'gold-row', 'silver-row', 'bronze-row'];
-            const EVENT_ICONS = {
-              sprint:'🏃', sprint200m:'🏃', longjump:'🦘', highjump:'🏗️',
-              badminton:'🏸', football:'⚽', cricket:'🏏', basketball:'🏀', volleyball:'🏐'
-            };
+        }); // end allResults.forEach for leaderboard rows
 
-            const card = document.createElement('div');
-            card.className = 'winner-card';
+        // ── Quick Event Winners (deduplicated by eventId) ──────────────────
+        const MEDAL = ['', '🥇', '🥈', '🥉'];
+        const MEDAL_ROW_CLASS = ['', 'gold-row', 'silver-row', 'bronze-row'];
+        const EVENT_ICONS = {
+          sprint:'🏃', sprint200m:'🏃', longjump:'🦘', highjump:'🏗️',
+          badminton:'🏸', football:'⚽', cricket:'🏏', basketball:'🏀', volleyball:'🏐'
+        };
 
+        // Merge all results by eventId to eliminate duplicate cards
+        const eventMap = new Map();
+        allResults.forEach(res => {
+          const key = res.eventId || res.eventName;
+          if (!eventMap.has(key)) {
+            eventMap.set(key, { ...res, standings: [...(res.standings || [])] });
+          } else {
+            // Merge standings — keep the highest-ranked entry per rank
+            const existing = eventMap.get(key);
+            (res.standings || []).forEach(s => {
+              const alreadyHas = existing.standings.some(e => e.rank === s.rank);
+              if (!alreadyHas) existing.standings.push(s);
+            });
+          }
+        });
+
+        eventMap.forEach(res => {
+            const standings = res.standings || [];
             const isTeam = res.type === 'team';
             const icon = EVENT_ICONS[res.eventId] || '🏆';
             const typePill = isTeam ? 'Team' : 'Solo';
+
+            const card = document.createElement('div');
+            card.className = 'winner-card';
 
             let podiumHTML = '';
             [1, 2, 3].forEach(rank => {
