@@ -1,0 +1,16 @@
+services:
+  - type: web
+    name: sportsday-api
+    runtime: python
+    rootDir: client/server
+    buildCommand: pip install -r requirements.txt
+    startCommand: gunicorn app:app
+    envVars:
+      - key: MONGO_URI
+        sync: false        # Set this manually in Render dashboard
+      - key: SECRET_KEY
+        sync: false        # Set this manually in Render dashboard
+      - key: FLASK_ENV
+        value: production
+      - key: PORT
+        value: 10000

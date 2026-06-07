@@ -89,6 +89,7 @@ with app.app_context():
 
 if __name__ == '__main__':
     port = int(os.getenv("PORT", 5000))
-    debug_mode = os.getenv("FLASK_ENV", "development") == "development"
-    print(f"Starting Flask server on port {port}...")
+    flask_env = os.getenv("FLASK_ENV", "development")
+    debug_mode = flask_env == "development"
+    print(f"Starting Flask server on port {port} (debug={debug_mode})...")
     app.run(host='0.0.0.0', port=port, debug=debug_mode)
