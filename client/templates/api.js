@@ -1,5 +1,11 @@
 // API client for Sports Day '26 Full Stack application
-const API_BASE_URL = 'http://localhost:5000/api';
+// Auto-detects environment: uses deployed backend on GitHub Pages, localhost in dev
+const _hostname = window.location.hostname;
+const _isLocal = _hostname === 'localhost' || _hostname === '127.0.0.1' || _hostname === '';
+// ⚠️ Replace 'YOUR_RENDER_APP_URL' below with your actual deployed backend URL
+//    e.g. 'https://sportsday-api.onrender.com/api'
+const DEPLOYED_API_URL = 'https://YOUR_RENDER_APP_URL/api';
+const API_BASE_URL = _isLocal ? 'http://localhost:5000/api' : DEPLOYED_API_URL;
 
 /**
  * Helper to perform fetch requests with JSON parsing and error handling.

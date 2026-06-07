@@ -1,5 +1,5 @@
 import os
-from flask import Flask, jsonify
+from flask import Flask, jsonify, send_file
 from flask_cors import CORS
 from dotenv import load_dotenv
 
@@ -15,15 +15,25 @@ from routes.scores import scores_bp
 # Load environment variables
 load_dotenv(override=True)
 
-app = Flask(__name__, 
-            static_folder=os.path.abspath(os.path.join(os.path.dirname(__file__), "..")),
+# Project root is two levels up from client/server/
+PROJECT_ROOT = os.path.abspath(os.path.join(os.path.dirname(__file__), "../.."))
+
+app = Flask(__name__,
+            static_folder=PROJECT_ROOT,
             static_url_path="")
 app.secret_key = os.getenv("SECRET_KEY", "dev_secret_key_sports_day_26")
 
 from flask import redirect
+
 @app.route('/')
-def root_redirect():
-    return redirect('/templates/dep_eve_login.html')
+def root_landing():
+    """Serve the landing page as the app entry point."""
+    return send_file(os.path.join(PROJECT_ROOT, 'landing.html'))
+
+@app.route('/templates/<path:filename>')
+def legacy_templates(filename):
+    """Backward-compat: /templates/X -> /client/templates/X"""
+    return redirect(f'/client/templates/{filename}')
 
 # Enable CORS for frontend integration with explicit origins to support credentials/cookies
 CORS(app, supports_credentials=True, resources={r"/api/*": {"origins": [
@@ -34,6 +44,9 @@ CORS(app, supports_credentials=True, resources={r"/api/*": {"origins": [
     "http://localhost:8080", "http://127.0.0.1:8080",
     "http://localhost:8888", "http://127.0.0.1:8888",
     "http://localhost:3000", "http://127.0.0.1:3000",
+    # GitHub Pages
+    "https://jeffri-ninan.github.io",
+    "https://sivaganesh-246.github.io",
     "null"
 ]}})
 
