@@ -4,7 +4,8 @@ services:
     runtime: python
     rootDir: client/server
     buildCommand: pip install -r requirements.txt
-    startCommand: gunicorn app:app
+    startCommand: gunicorn app:app --bind 0.0.0.0:$PORT --workers 2 --timeout 120
+    healthCheckPath: /health
     envVars:
       - key: MONGO_URI
         sync: false        # Set this manually in Render dashboard
@@ -12,5 +13,5 @@ services:
         sync: false        # Set this manually in Render dashboard
       - key: FLASK_ENV
         value: production
-      - key: PORT
-        value: 10000
+      - key: PYTHON_VERSION
+        value: 3.11.0

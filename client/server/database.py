@@ -196,8 +196,7 @@ try:
         # errors (TLSV1_ALERT_INTERNAL_ERROR) seen on Windows with Python 3.10+
         db_client = MongoClient(
             MONGO_URI,
-            serverSelectionTimeoutMS=8000,
-            tlsInsecure=True
+            serverSelectionTimeoutMS=8000
         )
         db_client.server_info()
         db_instance = db_client.get_default_database()
