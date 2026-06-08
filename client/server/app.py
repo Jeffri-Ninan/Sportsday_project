@@ -13,7 +13,7 @@ from routes.results import results_bp, seed_results
 from routes.scores import scores_bp
 
 # Load environment variables
-load_dotenv(override=True)
+load_dotenv()  # Do NOT use override=True — Render's env vars must take precedence
 
 # Project root is two levels up from client/server/
 PROJECT_ROOT = os.path.abspath(os.path.join(os.path.dirname(__file__), "../.."))

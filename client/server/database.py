@@ -3,7 +3,7 @@ from pymongo import MongoClient
 from dotenv import load_dotenv
 
 # Load environment variables
-load_dotenv(override=True)
+load_dotenv()  # Do NOT use override=True — Render's env vars must take precedence
 
 MONGO_URI = os.getenv("MONGO_URI")
 db_instance = None
