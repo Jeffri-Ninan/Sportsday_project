@@ -88,7 +88,7 @@ with app.app_context():
         print(f"Error during startup seeding: {e}")
 
 if __name__ == '__main__':
-    port = int(os.getenv("PORT", 5000))
+    port = int(os.getenv("PORT", 10000))
     flask_env = os.getenv("FLASK_ENV", "development")
     debug_mode = flask_env == "development"
     print(f"Starting Flask server on port {port} (debug={debug_mode})...")
