@@ -6,7 +6,7 @@ from dotenv import load_dotenv
 # Import database initialization
 from database import get_db
 # Import blueprints
-from routes.auth import auth_bp, seed_users
+from auth import auth_bp, seed_users
 from routes.events import events_bp, seed_events
 from routes.registrations import registrations_bp
 from routes.results import results_bp, seed_results
